@@ -1,6 +1,6 @@
 package poetweet;
 
-public enum MenuOptions {
+public enum MenuOptionResults {
     VALID_OPTION,
     INVALID_OPTION,
     QUIT,

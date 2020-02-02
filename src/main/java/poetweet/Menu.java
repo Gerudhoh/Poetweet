@@ -4,12 +4,16 @@ import java.util.ArrayList;
 
 public class Menu {
     private InputParser inputParser;
-    // Ideally this would be a hashmap<String, Function>
-    // where the string is the thing to do and the function is the things that does it
+    //TODO: make this a hashmap<String, MenuOption>
+    // where the string is the thing to do and the object that corresponds to it
+    // And maybe I send in the objects to this class in an arrayList????
     private ArrayList<String> menuItems;
+    //TODO: Get rid of this
+    private TwitterScraper twitterScraper;
 
     public Menu(){
         inputParser = new InputParser();
+        twitterScraper = new TwitterScraper();
         menuItems = new ArrayList<>(){{
             add("Input a Twitter Handle to Pull their Tweets");
 
@@ -46,17 +50,26 @@ public class Menu {
      *  or MenuOptions.QUIT if the user wants to quit the program
      */
 
-    public MenuOptions runProgram(){
+    public MenuOptionResults runProgram(){
         printMenuItems();
         System.out.println("What would you like to do? (1-" + menuItems.size() + ")");
 
         var input = inputParser.getParsedInput();
 
-        if(input == menuItems.size()){
-            return MenuOptions.QUIT;
+        if(input == 1){
+            System.out.println(twitterScraper.getOptionInstructions());
+            var handle = inputParser.getInput();
+            System.out.println("pulling tweets from " + handle);
+            var result = twitterScraper.pullTweetsFromTwitterHandle(handle);
+            System.out.println("Result = " + result);
+            return MenuOptionResults.VALID_OPTION;
         }
 
-        return MenuOptions.INVALID_OPTION;
+        if(input == menuItems.size()){
+            return MenuOptionResults.QUIT;
+        }
+
+        return MenuOptionResults.INVALID_OPTION;
     }
 
     /**
