@@ -8,12 +8,15 @@ public class Poetweet {
         Menu mainMenu = new Menu();
 
         mainMenu.printWelcome();
-        mainMenu.runProgram();
 
-        /*while(mainMenu.getRunAgain() == true){
-            mainMenu.setRunAgain(false);
-            mainMenu.runMenu();
-        }*/
+        var userSelection = MenuOptions.START;
+        while(userSelection != MenuOptions.QUIT){
+            userSelection = mainMenu.runProgram();
+
+            if(userSelection == MenuOptions.INVALID_OPTION){
+                mainMenu.printErrorMessage();
+            }
+        }
 
     }
 
