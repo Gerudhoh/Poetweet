@@ -1,11 +1,14 @@
 package poetweet;
 
 public class Poetweet {
+    private static MenuOptionsFactory menuOptionsFactory = new MenuOptionsFactory();
+
     /**
      * This is the main.
      */
     public static void main (String args[]) {
-        Menu mainMenu = new Menu();
+        var menuOptions = menuOptionsFactory.CreateMenuOptions();
+        var mainMenu = new Menu(menuOptions);
 
         mainMenu.printWelcome();
 
