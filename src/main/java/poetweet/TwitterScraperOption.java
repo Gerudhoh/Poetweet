@@ -4,7 +4,11 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class TwitterScraperOption implements IMenuOption {
-    private final String filename = ".\\src\\main\\python\\get_tweets.py";
+    private TwitterScraper _twitterScraper;
+
+    public TwitterScraperOption(TwitterScraper twitterScraper){
+        _twitterScraper = twitterScraper;
+    }
 
 
     public String getOptionInstructions(){
@@ -20,50 +24,9 @@ public class TwitterScraperOption implements IMenuOption {
     }
 
     public MenuOptionResults runMenuOption(String userInput){
-        var result = pullTweetsFromTwitterHandle(userInput);
+        var result = _twitterScraper.pullTweetsFromTwitterHandle(userInput);
         return result == true
                 ? MenuOptionResults.VALID_OPTION_SUCCESS
                 : MenuOptionResults.VALID_OPTION_FAILURE;
-    }
-
-    /**
-     * Runs the python script that pulls tweets from a specified Twitter handle
-     *
-     * @param twitterHandle the twitter handle to pull from
-     * @return true if the program ran successfully, false if it didn't
-     */
-    private boolean pullTweetsFromTwitterHandle(String twitterHandle){
-        Process process;
-        String output = "";
-        String line;
-
-        try{
-            process = Runtime
-                    .getRuntime()
-                    .exec(
-                            new String[]{
-                                    "python",
-                                    filename,
-                                    twitterHandle
-                            });
-        }catch(Exception e){
-            return false;
-        }
-
-        var stdout = process.getInputStream();
-        var reader = new BufferedReader(new InputStreamReader(stdout,StandardCharsets.UTF_8));
-        try{
-            while((line = reader.readLine()) != null){
-                output += line;
-            }
-        }catch(IOException e){
-            return false;
-        }
-
-        if(output.isEmpty() || output.toLowerCase().contains("error")){
-            return false;
-        }
-
-        return true;
     }
 }

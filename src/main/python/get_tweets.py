@@ -25,7 +25,7 @@ def get_tweets(username):
 	api = tweepy.API(auth)
 
 	#set count to however many tweets you want
-	number_of_tweets = 100
+	number_of_tweets = 150
 
 	#get tweets
 	tweets_for_csv = []

@@ -21,7 +21,7 @@ public class TweetParser {
         return tweetsList;
     }
 
-    public void parseTweets(String twitterHandle) throws IOException {
+    public boolean parseTweets(String twitterHandle) throws IOException {
             Path myPath = Paths.get("./data/" + twitterHandle + "_tweets.csv");
             List<String> lines = Files.readAllLines(myPath);
             Pattern regex = Pattern.compile(regexString);
@@ -37,5 +37,7 @@ public class TweetParser {
                 }
 
             });
+
+            return (tweetsList.size() > 0);
         }
 }
