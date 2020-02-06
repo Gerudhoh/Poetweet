@@ -62,8 +62,6 @@ public class Menu {
     private MenuOptionResults runMenuOption(IMenuOption option){
         System.out.println(option.getOptionInstructions());
         var input = _inputParser.getInput();
-        //TODO: Get rid of the next line
-        System.out.println("pulling tweets from " + input);
         var result = option.runMenuOption(input);
 
         if(result == MenuOptionResults.VALID_OPTION_FAILURE){

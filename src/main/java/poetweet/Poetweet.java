@@ -1,6 +1,7 @@
 package poetweet;
 
 public class Poetweet {
+    // TODO: Ask Judi if this is bad practice
     private static MenuOptionsFactory menuOptionsFactory = new MenuOptionsFactory();
 
     /**
