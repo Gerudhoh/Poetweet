@@ -11,6 +11,10 @@ public class Poetweet {
         var menuOptions = menuOptionsFactory.CreateMenuOptions();
         var mainMenu = new Menu(menuOptions);
 
+        /*SyllableCounter sc = new SyllableCounter();
+        int myCount = sc.count("facility");
+        System.out.println("count= " + myCount);*/
+
         mainMenu.printWelcome();
 
         var userSelection = MenuOptionResults.START;

@@ -10,34 +10,27 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TweetParser {
-    private final String regexString = ",\"?b['\"]['\"]?([^@#\"].*)['\"]";
-    private ArrayList<String> tweetsList;
+    private static final String regexString = ",\"?b['\"]['\"]?([^@#\"].*)['\"]";
 
-    public TweetParser(){
-        tweetsList = new ArrayList<>();
-    }
-
-    public ArrayList<String> getTweetsList(){
-        return tweetsList;
-    }
-
-    public boolean parseTweets(String twitterHandle) throws IOException {
-            Path myPath = Paths.get("./data/" + twitterHandle + "_tweets.csv");
+    public TwitterData parseTweets(String twitterHandle) throws IOException {
+            ArrayList<String> parsedTweets = new ArrayList<>();
+            Path myPath = Paths.get("./resources/" + twitterHandle + "_tweets.csv");
             List<String> lines = Files.readAllLines(myPath);
             Pattern regex = Pattern.compile(regexString);
 
             lines.forEach((line) -> {
-                Matcher m = regex.matcher(line);
+                Matcher match = regex.matcher(line);
 
-                if (m.find()){
-                    var tweet = m.group(1);
+                if (match.find()){
+                    var tweet = match.group(1);
                     if(!tweet.startsWith("RT")){
-                        tweetsList.add(m.group(1));
+                        System.out.println(match.group(1));
+                        parsedTweets.add(match.group(1));
                     }
                 }
 
             });
 
-            return (tweetsList.size() > 0);
+            return new TwitterData(twitterHandle, parsedTweets);
         }
 }

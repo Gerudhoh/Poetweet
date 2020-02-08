@@ -4,31 +4,46 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class Poem {
-    private int _numberOfLines;
-    private ArrayList<Integer> _syllablesPerLine;
-    private ArrayList<Integer> _rhymingScheme;
+    private ArrayList<PoemLine> poem;
 
     public Poem(int numberOfLines, Integer[] syllablesPerLine, Integer[] rhymingScheme){
-        _numberOfLines = numberOfLines;
-        _syllablesPerLine = new ArrayList<>(Arrays.asList(syllablesPerLine));
-        _rhymingScheme = new ArrayList<>(Arrays.asList(rhymingScheme));
-    }
-
-    public Poem() {
-
+        for(int i = 0; i < numberOfLines; i++){
+            poem.add(new PoemLine(syllablesPerLine[i], rhymingScheme[i]));
+        }
     }
 
     public int getNumberOfLines(){
-        return _numberOfLines;
+        return poem.size();
     }
 
     public ArrayList<Integer> getSyllablesPerLine(){
-        return _syllablesPerLine;
+        var syllablesPerLine = new ArrayList<Integer>();
+
+        for (var line : poem) {
+            syllablesPerLine.add(line.getNumSyllables());
+        }
+
+        return syllablesPerLine;
     }
 
     public ArrayList<Integer> getRhymingScheme(){
-        return _rhymingScheme;
+        var rhymingScheme = new ArrayList<Integer>();
+
+        for (var line : poem) {
+            rhymingScheme.add(line.getRhyme());
+        }
+
+        return rhymingScheme;
     }
 
+    @Override
+    public String toString() {
+        var stringBuilder = new StringBuilder();
+        for (var line : poem) {
+            stringBuilder.append(line);
+            stringBuilder.append("\n");
+        }
 
+        return stringBuilder.toString();
+    }
 }

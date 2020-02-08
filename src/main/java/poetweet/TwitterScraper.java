@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class TwitterScraper {
-    private final String filename = ".\\src\\main\\python\\get_tweets.py";
+    private static final String filename = ".\\src\\main\\python\\get_tweets.py";
 
     /**
      * Runs the python script that pulls tweets from a specified Twitter handle

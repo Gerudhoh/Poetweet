@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
     testImplementation('junit:junit:4.13')
+    implementation('eu.crydee:syllable-counter:4.1.0')
 }
 
 checkstyle {

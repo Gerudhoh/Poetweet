@@ -1,7 +1,7 @@
 package poetweet;
 
 public interface IMenuOption {
-    // TODO: maybe add a GetActionString(), get errorMEssage
+     // TODO: maybe add a GetActionString(), get errorMessage
      String getOptionInstructions();
 
      String getErrorMessage();

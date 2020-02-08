@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="eu.crydee:syllable-counter" type="repository">
+    <properties maven-id="eu.crydee:syllable-counter:4.1.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/syllable-counter-4.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

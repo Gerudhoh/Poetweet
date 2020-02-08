@@ -9,15 +9,16 @@ public class MenuOptionsFactory {
         var twitterScraper = new TwitterScraper();
         var tweetParser = new TweetParser();
 
-        var option1 = new TwitterScraperOption(twitterScraper);
-        var option2 = new HaikuGenerationOption(twitterScraper, tweetParser);
-        var optionLast = new QuitOption();
+        var twitterScraperOption = new TwitterScraperOption(twitterScraper);
+        var haikuGenerationOption = new HaikuGenerationOption(twitterScraper, tweetParser);
+        var quitOption = new QuitOption();
 
         var menuList = new ArrayList<IMenuOption>(){{
-            add(option1);
-            add(option2);
+            add(twitterScraperOption);
+            add(haikuGenerationOption);
+
             // Keep this at the bottom
-            add(optionLast);
+            add(quitOption);
         }};
 
         return menuList;
