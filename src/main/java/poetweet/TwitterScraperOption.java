@@ -1,69 +1,59 @@
 package poetweet;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-
 public class TwitterScraperOption implements IMenuOption {
-    private final String filename = ".\\src\\main\\python\\get_tweets.py";
+    private TwitterScraper _twitterScraper;
 
-
-    public String getOptionInstructions(){
-        return "Please input the twitter handle of the person whose tweets you want to pull";
-    }
-
-    public String getErrorMessage(){
-        return "Something went wrong, and the tweets were not able to be pulled. Please make sure that the twitter account you want to see is public.";
-    }
-
-    public String getOptionDescription(){
-        return "Input a Twitter Handle to Pull their Tweets";
-    }
-
-    public MenuOptionResults runMenuOption(String userInput){
-        var result = pullTweetsFromTwitterHandle(userInput);
-        return result == true
-                ? MenuOptionResults.VALID_OPTION_SUCCESS
-                : MenuOptionResults.VALID_OPTION_FAILURE;
+    /**
+     * Constructor for TwitterScraper.
+     * @param twitterScraper A twitter scraper object
+     */
+    public TwitterScraperOption(TwitterScraper twitterScraper) {
+        _twitterScraper = twitterScraper;
     }
 
     /**
-     * Runs the python script that pulls tweets from a specified Twitter handle
-     *
-     * @param twitterHandle the twitter handle to pull from
-     * @return true if the program ran successfully, false if it didn't
+     * Gets the option instructions.
+     * @return What the user needs to do to pull tweets from someone.
      */
-    private boolean pullTweetsFromTwitterHandle(String twitterHandle){
-        Process process;
-        String output = "";
-        String line;
+    public String getOptionInstructions() {
+        return "Please input the twitter handle of the person whose tweets you want to pull";
+    }
 
-        try{
-            process = Runtime
-                    .getRuntime()
-                    .exec(
-                            new String[]{
-                                    "python",
-                                    filename,
-                                    twitterHandle
-                            });
-        }catch(Exception e){
-            return false;
-        }
+    /**
+     * Gets the error message.
+     * @return A diagnosis of what went wrong and suggestions on what to do better next time.
+     */
+    public String getErrorMessage() {
+        var errorMessage = "Something went wrong, and the tweets were not able to be pulled.";
+        errorMessage += " Please make sure that the twitter account you want to see is public.";
+        return errorMessage;
+    }
 
-        var stdout = process.getInputStream();
-        var reader = new BufferedReader(new InputStreamReader(stdout,StandardCharsets.UTF_8));
-        try{
-            while((line = reader.readLine()) != null){
-                output += line;
-            }
-        }catch(IOException e){
-            return false;
-        }
+    /**
+     * The opposite of an error message, this lets the user know it did the thing.
+     * @return The success notification.
+     */
+    public String getOptionResult() {
+        return "Successfully pulled the desired tweets.";
+    }
 
-        if(output.isEmpty() || output.toLowerCase().contains("error")){
-            return false;
-        }
+    /**
+     * Describes the action undertaken by this menu option (For printing the menu).
+     * @return A short description of the menu option
+     */
+    public String getOptionDescription() {
+        return "Input a Twitter Handle to Pull their Tweets";
+    }
 
-        return true;
+    /**
+     * Executes the Twitter Scraping.
+     * @param userInput The twitter handle of the user whose tweets we want to scrape.
+     * @return A coded value about the command's success.
+     */
+    public MenuOptionResults runMenuOption(String userInput) {
+        var result = _twitterScraper.pullTweetsFromTwitterHandle(userInput);
+        return result
+                ? MenuOptionResults.VALID_OPTION_SUCCESS
+                : MenuOptionResults.VALID_OPTION_FAILURE;
     }
 }

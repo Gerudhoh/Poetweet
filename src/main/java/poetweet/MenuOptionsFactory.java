@@ -4,17 +4,29 @@ import java.util.ArrayList;
 
 public class MenuOptionsFactory {
 
-    public ArrayList<IMenuOption> CreateMenuOptions(){
+    /**
+     * Build the individual menu options and bundle them up nicely.
+     * @return An arrayList of all the things the system can do.
+     */
+    public ArrayList<IMenuOption> createMenuOptions() {
 
-        var option1 = new TwitterScraperOption();
-        var optionLast = new QuitOption();
+        var twitterScraper = new TwitterScraper();
+        var tweetParser = new TweetParser();
+        var haiku = new Haiku();
 
-        var menuList = new ArrayList<IMenuOption>(){{
-            add(option1);
+        var twitterScraperOption = new TwitterScraperOption(twitterScraper);
+        var haikuGenerationOption = new HaikuGenerationOption(haiku, twitterScraper, tweetParser);
+        var quitOption = new QuitOption();
 
-            // Keep this at the bottom
-            add(optionLast);
-        }};
+        var menuList = new ArrayList<IMenuOption>() {
+            {
+                add(twitterScraperOption);
+                add(haikuGenerationOption);
+
+                // Keep this at the bottom
+                add(quitOption);
+            }
+        };
 
         return menuList;
     }
