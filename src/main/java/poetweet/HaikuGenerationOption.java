@@ -27,7 +27,7 @@ public class HaikuGenerationOption extends PoemGenerator implements IMenuOption 
      * @return the error message.
      */
     public String getErrorMessage() {
-        var errorMessage = "Something went wrong, and the tweets were not able to be pulled.";
+        var errorMessage = "Something went wrong, and the tweets were not able to be pulled. \n";
         errorMessage +=  " Please make sure that the twitter account you want to see is public.";
         return errorMessage;
     }

@@ -68,11 +68,11 @@ public class Menu {
         var input = _inputParser.getInput();
         var result = option.runMenuOption(input);
 
-        if (result == MenuOptionResults.VALID_OPTION_FAILURE) {
-            System.out.println(option.getErrorMessage());
-        }
+        var message = result == MenuOptionResults.VALID_OPTION_FAILURE
+                ? option.getErrorMessage()
+                : option.getOptionResult();
 
-        System.out.println(option.getOptionResult() + "\n");
+        System.out.println(message);
 
         return result;
     }
