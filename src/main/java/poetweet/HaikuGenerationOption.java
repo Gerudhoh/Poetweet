@@ -4,13 +4,10 @@ import java.io.IOException;
 
 public class HaikuGenerationOption extends PoemGenerator implements IMenuOption {
     private Haiku _haiku;
-    private TweetParser _tweetParser;
-    private TwitterScraper _twitterScraper;
 
     public HaikuGenerationOption(Haiku haiku, TwitterScraper twitterScraper, TweetParser tweetParser){
+        super(twitterScraper, tweetParser);
         _haiku = haiku;
-        _tweetParser = tweetParser;
-        _twitterScraper = twitterScraper;
     }
 
     public String getOptionInstructions() {
@@ -26,24 +23,7 @@ public class HaikuGenerationOption extends PoemGenerator implements IMenuOption 
     }
 
     public MenuOptionResults runMenuOption(String userInput) {
-        var result = _twitterScraper.pullTweetsFromTwitterHandle(userInput);
-        TwitterData twitterData;
-        if(!result){
-            return MenuOptionResults.VALID_OPTION_FAILURE;
-        }
-
-        try{
-            twitterData = _tweetParser.parseTweets(userInput);
-        }
-        catch(IOException e){
-            return MenuOptionResults.VALID_OPTION_FAILURE;
-        }
-
-        if(twitterData.getTweets().size() <= 0){
-            return MenuOptionResults.VALID_OPTION_FAILURE;
-        }
-
-        generatePoem(_haiku, twitterData);
+        var result = generatePoem(_haiku, userInput);
         // TODO: Get rid of this
         System.out.println("POEM:\n" + _haiku.toString());
 
