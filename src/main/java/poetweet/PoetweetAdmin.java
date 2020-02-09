@@ -1,12 +1,12 @@
 package poetweet;
 
-public class Poetweet {
+public class PoetweetAdmin {
     private MenuOptionsFactory _menuOptionsFactory;
 
     /**
      * This is the constructor for the class that runs the program.
      */
-    public Poetweet() {
+    public PoetweetAdmin() {
         _menuOptionsFactory = new MenuOptionsFactory();
     }
 
@@ -15,15 +15,15 @@ public class Poetweet {
      * @param args All mains have this in Java.
      */
     public static void main(String[] args) {
-        var poetweet = new Poetweet();
-        poetweet.runProgram();
+        var poetweetAdmin = new PoetweetAdmin();
+        poetweetAdmin.runProgram();
     }
 
     /**
      * Work-around for the dumb Java static main thingy.
      */
     public void runProgram() {
-        var menuOptions = _menuOptionsFactory.createPoetweetMenuOptions();
+        var menuOptions = _menuOptionsFactory.createPoetweetAdminMenuOptions();
         var mainMenu = new Menu(menuOptions);
 
         mainMenu.printWelcome();
@@ -37,5 +37,4 @@ public class Poetweet {
             }
         }
     }
-
 }

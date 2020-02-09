@@ -3,14 +3,14 @@ package poetweet;
 import java.io.File;
 import java.util.Arrays;
 
-public class AdminActivitiesOption implements IMenuOption {
+public class ClearResourcesAdminOption implements IMenuOption {
 
     /**
      * Gets the option instructions.
      * @return Prompt for user consent
      */
     public String getOptionInstructions() {
-        return "Do you want to perform admin activities? This will clear the resources folder. (yes/no)";
+        return "Do you want to clear the resources folder. (yes/no)";
     }
 
     /**
@@ -26,7 +26,7 @@ public class AdminActivitiesOption implements IMenuOption {
      * @return A short description of the menu option
      */
     public String getOptionDescription() {
-        return "Perform Admin Activities";
+        return "Clean up Resources folder";
     }
 
     /**
@@ -38,7 +38,7 @@ public class AdminActivitiesOption implements IMenuOption {
     }
 
     /**
-     * Executes the admin user option.
+     * Executes the "clean up resources folder" admin user option.
      * @param userInput whatever information the user provided the system
      * @return A coded value about the command's success.
      */
