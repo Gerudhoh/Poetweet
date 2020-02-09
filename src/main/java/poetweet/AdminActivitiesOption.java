@@ -18,7 +18,7 @@ public class AdminActivitiesOption implements IMenuOption {
      * @return A general diagnosis of what went wrong.
      */
     public String getErrorMessage() {
-        return "Yikes sis!";
+        return "To run this option, just type \'yes\' when it asks if you want to clear the resources folder.";
     }
 
     /**
