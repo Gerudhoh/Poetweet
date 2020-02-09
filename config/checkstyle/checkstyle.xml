@@ -79,7 +79,9 @@
         <!-- See https://checkstyle.org/config_javadoc.html -->
         <!--<module name="InvalidJavadocPosition"/>-->
         <module name="JavadocMethod"/>
-        <module name="JavadocType"/>
+        <module name="JavadocType">
+            <property name="scope" value="public"/>
+        </module>
         <!--<module name="JavadocVariable"/>-->
         <module name="JavadocStyle"/>
         <module name="MissingJavadocMethod"/>
@@ -89,7 +91,9 @@
         <module name="ConstantName"/>
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName"/>
-        <module name="MemberName"/>
+        <module name="MemberName">
+            <property name="format" value="^[_a-z][a-zA-Z0-9]*$"/>
+        </module>
         <module name="MethodName"/>
         <module name="PackageName"/>
         <module name="ParameterName"/>
