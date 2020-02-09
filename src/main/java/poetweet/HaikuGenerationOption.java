@@ -41,6 +41,14 @@ public class HaikuGenerationOption extends PoemGenerator implements IMenuOption 
     }
 
     /**
+     * Gets the result of the haiku generation- the haiku.
+     * @return the haiku that was generate
+     */
+    public String getOptionResult() {
+        return "Your Haiku:\n" +  _haiku.toString();
+    }
+
+    /**
      * Executes the specific user option.
      * @param userInput The twitter handle
      * @return A coded value about the command's success.

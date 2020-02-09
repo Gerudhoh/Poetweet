@@ -30,6 +30,14 @@ public class TwitterScraperOption implements IMenuOption {
     }
 
     /**
+     * The opposite of an error message, this lets the user know it did the thing.
+     * @return The success notification.
+     */
+    public String getOptionResult() {
+        return "Successfully pulled the desired tweets.";
+    }
+
+    /**
      * Describes the action undertaken by this menu option (For printing the menu).
      * @return A short description of the menu option
      */

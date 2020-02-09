@@ -72,6 +72,8 @@ public class Menu {
             System.out.println(option.getErrorMessage());
         }
 
+        System.out.println(option.getOptionResult() + "\n");
+
         return result;
     }
 

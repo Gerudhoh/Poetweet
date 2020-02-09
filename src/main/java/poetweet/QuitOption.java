@@ -26,6 +26,14 @@ public class QuitOption implements IMenuOption {
     }
 
     /**
+     * The opposite of an error message, this lets the user know it did the thing.
+     * @return The success notification.
+     */
+    public String getOptionResult() {
+        return "Quit the program successfully.";
+    }
+
+    /**
      * Quits the program.
      * @param userInput User's response to if they really wanna quit.
      * @return A coded value about the command's success.

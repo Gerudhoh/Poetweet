@@ -21,9 +21,16 @@ public interface IMenuOption {
      String getOptionDescription();
 
      /**
+      * If the menu option generated some form of data - say, a poem, this lets us print that.
+      * @return The string that the option produced after execution.
+      */
+     String getOptionResult();
+
+     /**
       * Executes the specific user option.
       * @param userInput whatever information the user provided the system
       * @return A coded value about the command's success.
       */
      MenuOptionResults runMenuOption(String userInput);
+
 }
