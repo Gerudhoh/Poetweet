@@ -1,14 +1,14 @@
 package poetweet;
 
 import java.io.IOException;
-import java.util.stream.IntStream;
 
-public class HaikuGenerationOption implements IMenuOption, IPoemGenerator{
-    private static final Haiku HAIKU = new Haiku();
+public class HaikuGenerationOption extends PoemGenerator implements IMenuOption {
+    private Haiku _haiku;
     private TweetParser _tweetParser;
     private TwitterScraper _twitterScraper;
 
-    public HaikuGenerationOption(TwitterScraper twitterScraper, TweetParser tweetParser){
+    public HaikuGenerationOption(Haiku haiku, TwitterScraper twitterScraper, TweetParser tweetParser){
+        _haiku = haiku;
         _tweetParser = tweetParser;
         _twitterScraper = twitterScraper;
     }
@@ -43,22 +43,12 @@ public class HaikuGenerationOption implements IMenuOption, IPoemGenerator{
             return MenuOptionResults.VALID_OPTION_FAILURE;
         }
 
-        var poem = generatePoem(twitterData);
+        generatePoem(_haiku, twitterData);
         // TODO: Get rid of this
-        System.out.println(poem.toString());
+        System.out.println("POEM:\n" + _haiku.toString());
 
         return result
                 ? MenuOptionResults.VALID_OPTION_SUCCESS
                 : MenuOptionResults.VALID_OPTION_FAILURE;
-    }
-
-    public Poem generatePoem(TwitterData twitterData) {
-        int[] rhymingScheme = HAIKU.getRhymingScheme().stream().mapToInt(i->i).toArray();
-        Integer sum = IntStream.of(rhymingScheme).sum();
-        // No rhymes
-        if(sum == 0){
-            return generateNonRhymingPoem(tweets, poemType);
-        }
-        return poemType;
     }
 }

@@ -25,4 +25,9 @@ public class PoemLine {
     public void setLine(String line){
         _line = line;
     }
+
+    @Override
+    public String toString() {
+        return _line;
+    }
 }

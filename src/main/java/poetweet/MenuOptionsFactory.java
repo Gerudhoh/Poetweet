@@ -8,9 +8,10 @@ public class MenuOptionsFactory {
 
         var twitterScraper = new TwitterScraper();
         var tweetParser = new TweetParser();
+        var haiku = new Haiku();
 
         var twitterScraperOption = new TwitterScraperOption(twitterScraper);
-        var haikuGenerationOption = new HaikuGenerationOption(twitterScraper, tweetParser);
+        var haikuGenerationOption = new HaikuGenerationOption(haiku, twitterScraper, tweetParser);
         var quitOption = new QuitOption();
 
         var menuList = new ArrayList<IMenuOption>(){{

@@ -23,9 +23,14 @@ public class TweetParser {
 
                 if (match.find()){
                     var tweet = match.group(1);
+
+                    if(tweet.contains("\\")){
+                        tweet = tweet.replace("\\xe2\\x80\\x99", "\'");
+                        tweet = tweet.replace("\\xe2\\x80\\xa6", "...");
+                    }
+
                     if(!tweet.startsWith("RT")){
-                        System.out.println(match.group(1));
-                        parsedTweets.add(match.group(1));
+                        parsedTweets.add(tweet);
                     }
                 }
 
