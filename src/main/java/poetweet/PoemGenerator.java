@@ -9,32 +9,42 @@ import java.util.Arrays;
 import java.util.Random;
 
 public abstract class PoemGenerator {
-    private static final SyllableCounter _syllableCounter = new SyllableCounter();
-    private static final Random _random = new Random();
+    private static final SyllableCounter SYLLABLE_COUNTER = new SyllableCounter();
+    private static final Random RANDOM = new Random();
     private TweetParser _tweetParser;
     private TwitterScraper _twitterScraper;
 
-    public PoemGenerator(TwitterScraper twitterScraper, TweetParser tweetParser){
+    /**
+     * Constructor for the PoemGenerator.
+     * @param twitterScraper TwitterScraper
+     * @param tweetParser TweetParser
+     */
+    public PoemGenerator(TwitterScraper twitterScraper, TweetParser tweetParser) {
         _twitterScraper = twitterScraper;
         _tweetParser = tweetParser;
     }
 
+    /**
+     * Method collects tweets from a specified user, parses them up, and transforms the tweets into the poem specified.
+     * @param poem The type of poem the user wants to make, and what the final poem will be stored in.
+     * @param twitterHandle The twitter handle for the person whose tweets you want to turn into a poem.
+     * @return true if it worked and false if something went wrong.
+     */
     protected boolean generatePoem(Poem poem, String twitterHandle) {
         TwitterData twitterData;
         var pulledTweets = new File("./resources/" + twitterHandle + "_tweets.csv");
 
-        if(!pulledTweets.exists()){
+        if (!pulledTweets.exists()) {
             _twitterScraper.pullTweetsFromTwitterHandle(twitterHandle);
         }
 
-        try{
+        try {
             twitterData = _tweetParser.parseTweets(twitterHandle);
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             return false;
         }
 
-        if(twitterData.getTweets().size() <= 0){
+        if (twitterData.getTweets().size() <= 0) {
             return false;
         }
 
@@ -49,11 +59,11 @@ public abstract class PoemGenerator {
         var poemLines = poem.getPoem();
         var i = 0;
 
-        while(i < poem.getNumberOfLines()){
-            var randomTweetIndex = _random.nextInt(tweets.size());
+        while (i < poem.getNumberOfLines()) {
+            var randomTweetIndex = RANDOM.nextInt(tweets.size());
             var generatedLine = generatePoemLine(poemLines.get(i), tweets.get(randomTweetIndex));
 
-            if(usedIndexes.contains(randomTweetIndex) || generatedLine.isEmpty()){
+            if (usedIndexes.contains(randomTweetIndex) || generatedLine.isEmpty()) {
                 continue;
             }
 
@@ -63,28 +73,28 @@ public abstract class PoemGenerator {
         }
     }
 
-    private String generatePoemLine(PoemLine poemLine, String tweet){
+    private String generatePoemLine(PoemLine poemLine, String tweet) {
         var wordsInTweet = tweet.split("\\s");
         var wordsForPoemLine = new StringBuilder();
         var syllablesRemaining = poemLine.getNumSyllables();
 
-        if(wordsInTweet.length - syllablesRemaining <= 0){
+        if (wordsInTweet.length - syllablesRemaining <= 0) {
             return "";
         }
 
-        var randomWordIndex = _random.nextInt(wordsInTweet.length - syllablesRemaining);
+        var randomWordIndex = RANDOM.nextInt(wordsInTweet.length - syllablesRemaining);
         var wordsForLine = Arrays.copyOfRange(wordsInTweet, randomWordIndex, wordsInTweet.length);
 
         for (var word : wordsForLine) {
-            var wordSyllables = _syllableCounter.count(word);
+            var wordSyllables = SYLLABLE_COUNTER.count(word);
 
-            if(syllablesRemaining - wordSyllables >= 0){
+            if (syllablesRemaining - wordSyllables >= 0) {
                 wordsForPoemLine.append(word);
                 wordsForPoemLine.append(" ");
                 syllablesRemaining -= wordSyllables;
             }
 
-            if(syllablesRemaining <= 0){
+            if (syllablesRemaining <= 0) {
                 break;
             }
         }
