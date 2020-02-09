@@ -1,5 +1,8 @@
 package poetweet;
 
+import java.io.File;
+import java.util.Arrays;
+
 public class AdminActivitiesOption implements IMenuOption {
 
     /**
@@ -7,7 +10,7 @@ public class AdminActivitiesOption implements IMenuOption {
      * @return Prompt for user consent
      */
     public String getOptionInstructions() {
-        return "Do you want to perform admin activities? (yes/no)";
+        return "Do you want to perform admin activities? This will clear the resources folder. (yes/no)";
     }
 
     /**
@@ -40,7 +43,14 @@ public class AdminActivitiesOption implements IMenuOption {
      * @return A coded value about the command's success.
      */
     public MenuOptionResults runMenuOption(String userInput) {
-        // TODO: Call a method on another class that gets rid of the resource files.
+
+        if (userInput.indexOf("yes") < 0) {
+            return MenuOptionResults.VALID_OPTION_FAILURE;
+        }
+
+        Arrays.stream(new File("./resources").listFiles())
+                .forEach(File::delete);
+
         return MenuOptionResults.VALID_OPTION_SUCCESS;
     }
 }
