@@ -54,6 +54,8 @@ gradlew runPoetweetAdmin
 
 - Given that a file of tweets does not exist, when I generate a poem it will pull the tweets and then make the poem.
 
+- Given that the user provides an invalid twitter handle, when I try to generate a poem based on those non-existent tweets then the poem generation will terminate gracefully. 
+
   ##### Where to find this:
 
   - HaikuGnerationOption.java
