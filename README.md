@@ -95,4 +95,4 @@ While I strived to follow this principle in all my classes, the place where this
 
 
 
-ALSO FYI THE SYLLABLE COUNTING LIBRARY THAT I USED IS BUGGY :( There's an issue on github about it, don't blame me.
+(ALSO FYI the syllable counter library that I used is buggy :( There's an issue on github about it, don't blame me.)
