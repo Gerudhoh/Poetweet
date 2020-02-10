@@ -1,12 +1,7 @@
 plugins {
     id 'checkstyle'
-    id 'application'
 }
 apply plugin: 'java'
-
-ext {
-    javaMainClass = "poetweet.Poetweet"
-}
 
 sourceCompatibility = 1.11
 targetCompatibility = 1.11
@@ -22,10 +17,6 @@ dependencies {
 
 checkstyle {
     toolVersion = "8.26"
-}
-
-application {
-    mainClassName = "Poetweet"
 }
 
 // Main main for Poetweet to make the poems
