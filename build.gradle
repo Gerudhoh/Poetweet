@@ -19,3 +19,17 @@ checkstyle {
     toolVersion = "8.26"
 }
 
+// Main main for Poetweet to make the poems
+task(runPoetweet, dependsOn: 'classes', type: JavaExec) {
+    main = "poetweet.Poetweet"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
+// Main for Poetweet Admin to do behind the scenes stuff
+task(runPoetweetAdmin, dependsOn: 'classes', type: JavaExec) {
+    main = "poetweet.PoetweetAdmin"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
