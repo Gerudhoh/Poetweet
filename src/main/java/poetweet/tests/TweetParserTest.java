@@ -1,5 +1,60 @@
-import static org.junit.Assert.*;
+package poetweet.tests;
+
+import org.junit.Before;
+import org.junit.Test;
+import poetweet.TweetParser;
+import poetweet.TwitterData;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class TweetParserTest {
+    private TweetParser tweetParser;
+    private String twitterHandle;
 
+    @Before
+    public void setUp() throws Exception {
+        tweetParser = new TweetParser();
+        twitterHandle = "testfile";
+    }
+
+    @Test
+    public void parseTweets_goodTwitterHandle_RunsSuccessfully() {
+        var twitterData = doTheTweetParsing(twitterHandle);
+        var tweets = twitterData.getTweets();
+        assertEquals(6, tweets.size());
+    }
+
+
+    @Test
+    public void parseTweets_badTwitterHandle_RunsUnsuccessfully() {
+        var twitterData = doTheTweetParsing("3poienb6");
+        assertNull(twitterData);
+    }
+
+    @Test
+    public void parseTweets_emptyTwitterHandle_RunsUnsuccessfully() {
+        var twitterData = doTheTweetParsing("");
+        assertNull(twitterData);
+    }
+
+    @Test
+    public void parseTweets_nullTwitterHandle_RunsUnsuccessfully() {
+        var twitterData = doTheTweetParsing(null);
+        assertNull(twitterData);
+    }
+
+    private TwitterData doTheTweetParsing(String handle){
+        TwitterData twitterData = null;
+        try{
+            twitterData = tweetParser.parseTweets(handle);
+        }
+        catch (IOException e){
+            System.out.println(e.getStackTrace());
+        }
+
+        return twitterData;
+    }
 }
