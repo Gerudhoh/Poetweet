@@ -19,7 +19,7 @@ public class TweetParserTest {
      * This sets up all the tests.
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         tweetParser = new TweetParser();
         twitterHandle = "testfile";
     }
