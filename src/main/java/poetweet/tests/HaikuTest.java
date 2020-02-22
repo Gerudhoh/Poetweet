@@ -13,15 +13,18 @@ public class HaikuTest {
     private static final Integer MIDDLE_LINE_SYLLABLES = 7;
     private static final Integer RHYME = 0;
 
-    public HaikuTest() {
-    }
-
+    /**
+     * This sets up all the tests.
+     */
     @Before
     public void setup() {
         testHaiku = new Haiku();
 
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
     public void testNumberLines() {
         System.out.println("Testing number of lines");
@@ -29,16 +32,22 @@ public class HaikuTest {
         assertEquals(EXPECTED_NUMLINES, actualNumLines);
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
-    public void testSyllablesPerLine(){
+    public void testSyllablesPerLine() {
         var syllables = testHaiku.getSyllablesPerLine();
         assertEquals(OUTER_LINE_SYLLABLES, syllables.get(0));
         assertEquals(MIDDLE_LINE_SYLLABLES, syllables.get(1));
         assertEquals(OUTER_LINE_SYLLABLES, syllables.get(2));
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
-    public void testRhymingScheme(){
+    public void testRhymingScheme() {
         var rhymes = testHaiku.getRhymingScheme();
         for (var rhyme : rhymes) {
             assertEquals(RHYME, rhyme);

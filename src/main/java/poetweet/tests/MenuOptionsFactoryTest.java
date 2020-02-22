@@ -11,28 +11,37 @@ import static org.junit.Assert.assertThat;
 
 public class MenuOptionsFactoryTest {
     private MenuOptionsFactory testMenuOptionsFactory;
+    private static final int MENUITEMS = 3;
+    private static final int ADMINMENUITEMS = 2;
 
-    public MenuOptionsFactoryTest(){}
-
+    /**
+     * This sets up all the tests.
+     */
     @Before
     public void setup() {
         testMenuOptionsFactory = new MenuOptionsFactory();
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
-    public void testCreatePoetweetMenuOptions_CreatesMenuCorrectly(){
+    public void testCreatePoetweetMenuOptions_CreatesMenuCorrectly() {
         var menu = testMenuOptionsFactory.createPoetweetMenuOptions();
         var length = menu.size();
-        assertEquals(3, length);
-        assertThat(menu.get(length-1), instanceOf(QuitOption.class));
+        assertEquals(MENUITEMS, length);
+        assertThat(menu.get(length - 1), instanceOf(QuitOption.class));
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
-    public void testCreatePoetweetAdminMenuOptions_CreatesMenuCorrectly(){
+    public void testCreatePoetweetAdminMenuOptions_CreatesMenuCorrectly() {
         var menu = testMenuOptionsFactory.createPoetweetAdminMenuOptions();
         var length = menu.size();
-        assertEquals(2, length);
-        assertThat(menu.get(length-1), instanceOf(QuitOption.class));
+        assertEquals(ADMINMENUITEMS, length);
+        assertThat(menu.get(length - 1), instanceOf(QuitOption.class));
     }
 
 }

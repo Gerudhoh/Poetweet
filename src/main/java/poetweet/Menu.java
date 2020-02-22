@@ -2,7 +2,7 @@ package poetweet;
 
 import java.util.ArrayList;
 
-public class Menu {
+public abstract class Menu {
     private InputParser _inputParser;
     private ArrayList<IMenuOption> _menuItems;
 
@@ -42,7 +42,7 @@ public class Menu {
      * @return MenuOptions.VALID_OPTION or MenuOptions.INVALID_OPTION depending on the validity of
      *  the option selected by the user, or MenuOptions.QUIT if the user wants to quit the program
      */
-    public MenuOptionResults runProgram() {
+    public IReturnable runMenu() {
         printMenuItems();
         System.out.println("What would you like to do? (1-" + _menuItems.size() + ")");
 
@@ -53,7 +53,7 @@ public class Menu {
             return runMenuOption(selectedOption);
         }
 
-        return MenuOptionResults.INVALID_OPTION;
+        return null;
     }
 
     /**
@@ -63,12 +63,12 @@ public class Menu {
      * @return MenuOptions.VALID_OPTION_SUCCESS or MenuOptions.VALID_OPTION_FAILURE depending on whether
      * the menu option executed successfully
      */
-    private MenuOptionResults runMenuOption(IMenuOption option) {
+    private IReturnable runMenuOption(IMenuOption option) {
         System.out.println(option.getOptionInstructions());
         var input = _inputParser.getInput();
         var result = option.runMenuOption(input);
 
-        var message = result == MenuOptionResults.VALID_OPTION_FAILURE
+        var message = result == null
                 ? option.getErrorMessage()
                 : option.getOptionResult();
 

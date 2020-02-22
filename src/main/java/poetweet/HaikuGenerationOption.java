@@ -53,11 +53,11 @@ public class HaikuGenerationOption extends PoemGenerator implements IMenuOption 
      * @param userInput The twitter handle
      * @return A coded value about the command's success.
      */
-    public MenuOptionResults runMenuOption(String userInput) {
+    public IReturnable runMenuOption(String userInput) {
         var result = generatePoem(_haiku, userInput);
 
         return result
-                ? MenuOptionResults.VALID_OPTION_SUCCESS
-                : MenuOptionResults.VALID_OPTION_FAILURE;
+                ? _haiku
+                : null;
     }
 }
