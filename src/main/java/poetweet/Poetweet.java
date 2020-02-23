@@ -1,15 +1,17 @@
 package poetweet;
 
-import poetweet.Exceptions.QuitException;
+import java.util.ArrayList;
 
 public class Poetweet extends Menu {
     private static final MenuOptionsFactory MENU_OPTIONS_FACTORY = new MenuOptionsFactory();
+    private ArrayList<ReturnablePoem> _poems;
 
     /**
      * This is the constructor for the class that runs the program.
      */
     public Poetweet() {
         super(MENU_OPTIONS_FACTORY.createPoetweetMenuOptions());
+        _poems = new ArrayList<>();
     }
 
     /**
@@ -22,23 +24,37 @@ public class Poetweet extends Menu {
     }
 
     /**
-     * Work-around for the dumb Java static main thingy.
+     * Main loop of the program, overriden to save poems.
      */
+    @Override
     public void runProgram() {
-        IReturnable userSelection;
+        IReturnable returnedObject;
         printWelcome();
+        var running = true;
 
-        while (true) {
+        while (running) {
             try {
-                userSelection = runMenu();
-            } catch (QuitException qe) {
+                returnedObject = runMenu();
+            } catch (Exceptions.QuitException qe) {
                 break;
+            } catch (Exceptions.PoetweetIOException pioe) {
+                System.out.println(pioe.getMessage());
+                returnedObject = null;
             }
 
-            if (userSelection == null) {
+            if (returnedObject == null) {
                 printErrorMessage();
+                continue;
+            }
+
+            if (returnedObject instanceof ReturnablePoem) {
+                _poems.add((ReturnablePoem) returnedObject);
+            }
+
+            if (returnedObject instanceof IPoemUsingReturnable) {
+                ((IPoemUsingReturnable) returnedObject).execute(_poems);
             }
         }
     }
-
 }
+

@@ -3,7 +3,7 @@ package poetweet;
 public class PoemLine {
     private int _numSyllables;
     private int _rhyme;
-    private String _line;
+    private String _text;
 
     /**
      * Constructor for a poem line.
@@ -13,6 +13,18 @@ public class PoemLine {
     public PoemLine(int numSyllables, int rhyme) {
         _numSyllables = numSyllables;
         _rhyme = rhyme;
+    }
+
+    /**
+     * Constructor for a poem line.
+     * @param numSyllables Number of syllables on the poem line
+     * @param rhyme The line's rhyming scheme.
+     * @param text The text of the poem line (what the line says).
+     */
+    public PoemLine(int numSyllables, int rhyme, String text) {
+        _numSyllables = numSyllables;
+        _rhyme = rhyme;
+        _text = text;
     }
 
     /**
@@ -35,16 +47,16 @@ public class PoemLine {
      * Getter for the text of the poem line.
      * @return Like the literal words of the line.
      */
-    public String getLine() {
-        return _line;
+    public String getText() {
+        return _text;
     }
 
     /**
      * Setter for the text of the poem line.
-     * @param line The words that the line is gonna say.
+     * @param text The words that the line is gonna say.
      */
-    public void setLine(String line) {
-        _line = line;
+    public void setText(String text) {
+        _text = text;
     }
 
     /**
@@ -53,6 +65,6 @@ public class PoemLine {
      */
     @Override
     public String toString() {
-        return _line;
+        return _text;
     }
 }
