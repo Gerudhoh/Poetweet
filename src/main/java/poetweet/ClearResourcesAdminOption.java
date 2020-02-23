@@ -42,15 +42,15 @@ public class ClearResourcesAdminOption implements IMenuOption {
      * @param userInput whatever information the user provided the system
      * @return A coded value about the command's success.
      */
-    public MenuOptionResults runMenuOption(String userInput) {
+    public IReturnable runMenuOption(String userInput) {
 
         if (userInput.indexOf("yes") < 0) {
-            return MenuOptionResults.VALID_OPTION_FAILURE;
+            return null;
         }
 
         Arrays.stream(new File("./resources").listFiles())
                 .forEach(File::delete);
 
-        return MenuOptionResults.VALID_OPTION_SUCCESS;
+        return new Success();
     }
 }

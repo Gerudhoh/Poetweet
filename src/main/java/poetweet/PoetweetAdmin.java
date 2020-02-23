@@ -1,13 +1,13 @@
 package poetweet;
 
-public class PoetweetAdmin {
-    private MenuOptionsFactory _menuOptionsFactory;
+public class PoetweetAdmin extends Menu {
+    private static final MenuOptionsFactory MENU_OPTIONS_FACTORY = new MenuOptionsFactory();
 
     /**
      * This is the constructor for the class that runs the program.
      */
     public PoetweetAdmin() {
-        _menuOptionsFactory = new MenuOptionsFactory();
+        super(MENU_OPTIONS_FACTORY.createPoetweetAdminMenuOptions());
     }
 
     /**
@@ -23,17 +23,18 @@ public class PoetweetAdmin {
      * Work-around for the dumb Java static main thingy.
      */
     public void runProgram() {
-        var menuOptions = _menuOptionsFactory.createPoetweetAdminMenuOptions();
-        var mainMenu = new Menu(menuOptions);
+        IReturnable userSelection;
+        printWelcome();
 
-        mainMenu.printWelcome();
+        while (true) {
+            try {
+                userSelection = runMenu();
+            } catch (Exceptions.QuitException qe) {
+                 break;
+            }
 
-        var userSelection = MenuOptionResults.START;
-        while (userSelection != MenuOptionResults.QUIT) {
-            userSelection = mainMenu.runProgram();
-
-            if (userSelection == MenuOptionResults.INVALID_OPTION) {
-                mainMenu.printErrorMessage();
+            if (userSelection == null) {
+                printErrorMessage();
             }
         }
     }

@@ -50,10 +50,10 @@ public class TwitterScraperOption implements IMenuOption {
      * @param userInput The twitter handle of the user whose tweets we want to scrape.
      * @return A coded value about the command's success.
      */
-    public MenuOptionResults runMenuOption(String userInput) {
+    public IReturnable runMenuOption(String userInput) {
         var result = _twitterScraper.pullTweetsFromTwitterHandle(userInput);
         return result
-                ? MenuOptionResults.VALID_OPTION_SUCCESS
-                : MenuOptionResults.VALID_OPTION_FAILURE;
+                ? new Success()
+                : null;
     }
 }

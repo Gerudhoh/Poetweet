@@ -2,7 +2,7 @@ package poetweet;
 
 import java.util.ArrayList;
 
-public abstract class Poem {
+public abstract class Poem implements IReturnable {
     private ArrayList<PoemLine> _poem;
 
     /**

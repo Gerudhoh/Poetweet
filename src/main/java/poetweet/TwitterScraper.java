@@ -15,6 +15,11 @@ public class TwitterScraper {
      * @return true if the program ran successfully, false if it didn't
      */
     public boolean pullTweetsFromTwitterHandle(String twitterHandle) {
+
+        if (twitterHandle == null || twitterHandle.isEmpty()) {
+            return false;
+        }
+
         Process process;
         String output = "";
         String line;

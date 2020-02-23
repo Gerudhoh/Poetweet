@@ -31,6 +31,6 @@ public interface IMenuOption {
       * @param userInput whatever information the user provided the system
       * @return A coded value about the command's success.
       */
-     MenuOptionResults runMenuOption(String userInput);
+     IReturnable runMenuOption(String userInput);
 
 }
