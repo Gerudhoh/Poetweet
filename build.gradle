@@ -31,9 +31,7 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
-
-    // Exclude this because I don't want it to run all the time
+    // Exclude this because I don't want it to run all the time because it deletes files
     exclude '**/DirectoryClearerTest.class'
 
     testLogging {
