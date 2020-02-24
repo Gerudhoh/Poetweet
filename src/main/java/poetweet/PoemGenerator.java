@@ -38,11 +38,7 @@ public abstract class PoemGenerator {
             _twitterScraper.pullTweetsFromTwitterHandle(twitterHandle);
         }
 
-        try {
-            twitterData = _tweetParser.parseTweets(twitterHandle);
-        } catch (IOException e) {
-            throw new Exceptions.PoetweetIOException();
-        }
+        twitterData = _tweetParser.parseTweets(twitterHandle);
 
         if (twitterData.getTweets().size() <= 0) {
             return false;

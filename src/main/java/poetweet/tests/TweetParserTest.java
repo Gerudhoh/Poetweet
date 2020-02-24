@@ -63,11 +63,7 @@ public class TweetParserTest {
 
     private TwitterData doTheTweetParsing(String handle) {
         TwitterData twitterData = null;
-        try {
-            twitterData = _tweetParser.parseTweets(handle);
-        } catch (IOException e) {
-            System.out.println(e.getStackTrace());
-        }
+        twitterData = _tweetParser.parseTweets(handle);
 
         return twitterData;
     }

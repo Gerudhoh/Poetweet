@@ -8,6 +8,18 @@ public class Exceptions {
     /**
      * Exception for when the user wants to quit the program.
      */
+    protected static class PoetweetException extends RuntimeException {
+        /**
+         * Constructor.
+         */
+        protected PoetweetException(String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * Exception for when the user wants to quit the program.
+     */
     protected static class QuitException extends RuntimeException {
         /**
          * Constructor.
@@ -20,19 +32,30 @@ public class Exceptions {
     /**
      * My take on an IO exception.
      */
-    protected static class PoetweetIOException extends RuntimeException {
+    public static class PoetweetIOException extends PoetweetException {
         /**
          * Constructor.
          */
-        protected PoetweetIOException() {
-            super();
+        protected PoetweetIOException(String msg) {
+            super(msg);
+        }
+    }
+    /**
+     * My take on an IO exception.
+     */
+    public static class PoetweetPathException extends PoetweetException {
+        /**
+         * Constructor.
+         */
+        protected PoetweetPathException(String msg) {
+            super(msg);
         }
     }
 
     /**
      * Exception for when a dataset is too small to make a specific poem.
      */
-    protected static class NotEnoughTweetsException extends RuntimeException {
+    protected static class NotEnoughTweetsException extends PoetweetException {
         /**
          * Constructor.
          */

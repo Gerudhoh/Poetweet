@@ -53,7 +53,7 @@ public class TwitterScraperOption implements IMenuOption {
     public IReturnable runMenuOption(String userInput) {
         var result = _twitterScraper.pullTweetsFromTwitterHandle(userInput);
         return result
-                ? new Success()
-                : null;
+                ? new Returnables.Success()
+                : new Returnables.Faiure();
     }
 }

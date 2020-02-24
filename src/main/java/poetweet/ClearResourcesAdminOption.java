@@ -51,11 +51,11 @@ public class ClearResourcesAdminOption implements IMenuOption {
     public IReturnable runMenuOption(String userInput) {
 
         if (userInput.indexOf("yes") < 0) {
-            return null;
+            return new Returnables.Faiure();
         }
 
         _directoryClearer.clearDirectory("./resources");
 
-        return new Success();
+        return new Returnables.Success();
     }
 }

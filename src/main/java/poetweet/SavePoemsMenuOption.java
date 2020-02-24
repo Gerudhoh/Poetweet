@@ -44,6 +44,6 @@ public final class SavePoemsMenuOption implements IMenuOption {
         if (userInput.toLowerCase().equals("all")) {
             return new PoemSaver();
         }
-        return null;
+        return new Returnables.Faiure();
     }
 }

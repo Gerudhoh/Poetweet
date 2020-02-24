@@ -22,7 +22,7 @@ public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenu
      */
     public String getOptionInstructions() {
         var instruction = "Please input the twitter handle, the poem's length & the number of syllables per line \n";
-        instruction +=  "Format: TWITTERHANDLE:NUMLINESINPOEM:NUMSYLLABLESPERLINE (Example: @Hozier:10:10)";
+        instruction +=  "Format: TwitterHandle:NumLinesInPoem:NumSyllablesPerLine (Example: @Hozier:10:10)";
         return instruction;
     }
 
@@ -61,21 +61,21 @@ public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenu
         var inputVariables = userInput.split(":");
 
         if(inputVariables.length < 3){
-            return null;
+            return new Returnables.Faiure();
         }
 
         var twitterHandle = inputVariables[0];
 
-        createFreeformPoem(inputVariables);
+        createFreeformPoemObject(inputVariables);
 
         var result = generatePoem(_poem, twitterHandle);
 
         return result
                 ? new ReturnablePoem(_poem, PoemTypes.FREEFORM, twitterHandle)
-                : null;
+                : new Returnables.Faiure();
     }
 
-    private void createFreeformPoem(String [] inputVariables){
+    private void createFreeformPoemObject(String [] inputVariables){
         var numLines = Integer.parseInt(inputVariables[1]);
         var numSyllables = Integer.parseInt(inputVariables[2]);
 

@@ -56,6 +56,6 @@ public class ClearSavedPoemsAdminOption implements IMenuOption {
 
         _directoryClearer.clearDirectory("./poems");
 
-        return new Success();
+        return new Returnables.Success();
     }
 }
