@@ -32,7 +32,7 @@ dependencies {
 
 test {
     // Exclude this because I don't want it to run all the time because it deletes files
-    exclude '**/DirectoryClearerTest.class'
+    exclude '**/DirectoryClearerTest.class','**/TwitterScraperTest.class'
 
     testLogging {
         showStandardStreams = true
