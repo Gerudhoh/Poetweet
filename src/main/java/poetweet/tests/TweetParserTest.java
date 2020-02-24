@@ -2,13 +2,12 @@ package poetweet.tests;
 
 import org.junit.Before;
 import org.junit.Test;
+import poetweet.Exceptions;
 import poetweet.TweetParser;
 import poetweet.TwitterData;
 
-import java.io.IOException;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class TweetParserTest {
     private TweetParser _tweetParser;
@@ -39,8 +38,11 @@ public class TweetParserTest {
      */
     @Test
     public void parseTweets_badTwitterHandle_RunsUnsuccessfully() {
-        var twitterData = doTheTweetParsing("3poienb6");
-        assertNull(twitterData);
+        try{
+            doTheTweetParsing("");
+        }catch (Exceptions.PoetweetIOException pioe){
+            assertTrue(pioe.getMessage().length() > 0);
+        }
     }
 
     /**
@@ -48,8 +50,11 @@ public class TweetParserTest {
      */
     @Test
     public void parseTweets_emptyTwitterHandle_RunsUnsuccessfully() {
-        var twitterData = doTheTweetParsing("");
-        assertNull(twitterData);
+        try{
+            doTheTweetParsing("");
+        }catch (Exceptions.PoetweetIOException pioe){
+            assertTrue(pioe.getMessage().length() > 0);
+        }
     }
 
     /**
@@ -57,13 +62,15 @@ public class TweetParserTest {
      */
     @Test
     public void parseTweets_nullTwitterHandle_RunsUnsuccessfully() {
-        var twitterData = doTheTweetParsing(null);
-        assertNull(twitterData);
+        try{
+            doTheTweetParsing(null);
+        }catch (Exceptions.PoetweetIOException pioe){
+            assertTrue(pioe.getMessage().length() > 0);
+        }
     }
 
     private TwitterData doTheTweetParsing(String handle) {
-        TwitterData twitterData = null;
-        twitterData = _tweetParser.parseTweets(handle);
+        TwitterData twitterData = _tweetParser.parseTweets(handle);
 
         return twitterData;
     }

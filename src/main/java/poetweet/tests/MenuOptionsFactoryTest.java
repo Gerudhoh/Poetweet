@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 
 public class MenuOptionsFactoryTest {
     private MenuOptionsFactory _testMenuOptionsFactory;
-    private static final int MENUITEMS = 4;
+    private static final int MENUITEMS = 5;
     private static final int ADMINMENUITEMS = 3;
 
     /**

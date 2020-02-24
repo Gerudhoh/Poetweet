@@ -43,12 +43,12 @@ public class TweetParser {
                     }
 
                 });
-
-                return new TwitterData(twitterHandle, parsedTweets);
             } catch (InvalidPathException pe){
                 throw new Exceptions.PoetweetPathException(pe.getMessage());
             } catch (IOException ioe){
                 throw new Exceptions.PoetweetIOException("IO Exception: " + ioe.getMessage());
             }
+
+            return new TwitterData(twitterHandle, parsedTweets);
         }
 }
