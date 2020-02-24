@@ -10,18 +10,18 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ReturnablePoemTest {
-    private ReturnablePoem returnablePoem;
-    private Haiku haiku;
-    private String handle;
+    private ReturnablePoem _returnablePoem;
+    private Haiku _haiku;
+    private String _handle;
 
     /**
      * This sets up all the tests.
      */
     @Before
     public void setUp() {
-        haiku = new Haiku();
-        handle = "snak3y_";
-        returnablePoem = new ReturnablePoem(haiku, PoemTypes.HAIKU, handle);
+        _haiku = new Haiku();
+        _handle = "snak3y_";
+        _returnablePoem = new ReturnablePoem(_haiku, PoemTypes.HAIKU, _handle);
     }
 
     /**
@@ -29,8 +29,8 @@ public class ReturnablePoemTest {
      */
     @Test
     public void getPoemTest() {
-        var result = returnablePoem.getPoem();
-        assertTrue(haiku.equals(result));
+        var result = _returnablePoem.getPoem();
+        assertTrue(_haiku.equals(result));
     }
 
     /**
@@ -38,7 +38,7 @@ public class ReturnablePoemTest {
      */
     @Test
     public void getPoemTypeTest() {
-        var result = returnablePoem.getPoemType();
+        var result = _returnablePoem.getPoemType();
         assertEquals(PoemTypes.HAIKU, result);
     }
 
@@ -47,7 +47,7 @@ public class ReturnablePoemTest {
      */
     @Test
     public void getTwitterHandleTest() {
-        var result = returnablePoem.getTwitterHandle();
-        assertEquals(handle, result);
+        var result = _returnablePoem.getTwitterHandle();
+        assertEquals(_handle, result);
     }
 }

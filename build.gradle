@@ -10,11 +10,33 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+
+    main.java.srcDirs = ['./src/main/java/poetweet/tests', './src/main/java/poetweet']
+    test.java.srcDirs = ['.']
+
+}
+
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     implementation('eu.crydee:syllable-counter:4.1.0')
-    implementation 'org.testng:testng:6.9.6'
+    implementation('org.testng:testng:6.9.6')
+    testImplementation(
+            'junit:junit:4.12',
+            'org.junit.jupiter:junit-jupiter-api:5.4.2'
+    )
+    testRuntime(
+            'org.junit.jupiter:junit-jupiter-engine:5.4.2',
+            'org.junit.vintage:junit-vintage-engine:5.4.2'
+    )
+}
+
+test {
+    // Exclude this because I don't want it to run all the time because it deletes files
+    exclude '**/DirectoryClearerTest.class','**/TwitterScraperTest.class'
+
+    testLogging {
+        showStandardStreams = true
+    }
 }
 
 checkstyle {

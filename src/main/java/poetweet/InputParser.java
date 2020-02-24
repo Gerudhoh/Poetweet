@@ -3,13 +3,13 @@ package poetweet;
 import java.util.Scanner;
 
 public class InputParser {
-    private Scanner reader;         // source of command input
+    private Scanner _reader;         // source of command input
 
     /**
      * Create a parser to read from the terminal window.
      */
     public InputParser() {
-        reader = new Scanner(System.in);
+        _reader = new Scanner(System.in);
     }
 
     /**
@@ -17,7 +17,7 @@ public class InputParser {
      * @return The string of user input
      */
     public String getInput() {
-        return reader.nextLine();
+        return _reader.nextLine();
     }
 
     /**

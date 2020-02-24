@@ -8,14 +8,14 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 public class TwitterScraperTest {
-    private TwitterScraper twitterScraper;
+    private TwitterScraper _twitterScraper;
 
     /**
      * This sets up all the tests.
      */
     @Before
     public void setUp() {
-        twitterScraper = new TwitterScraper();
+        _twitterScraper = new TwitterScraper();
     }
 
     /**
@@ -23,7 +23,7 @@ public class TwitterScraperTest {
      */
     @Test
     public void pullTweetsFromTwitterHandle_GoodTwitterHandle_RunsSuccessfully() {
-        var result = twitterScraper.pullTweetsFromTwitterHandle("dog_feelings");
+        var result = _twitterScraper.pullTweetsFromTwitterHandle("dog_feelings");
         assertTrue(result);
     }
 
@@ -32,7 +32,7 @@ public class TwitterScraperTest {
      */
     @Test
     public void pullTweetsFromTwitterHandle_BadTwitterHandle_RunsUnsuccessfully() {
-        var result = twitterScraper.pullTweetsFromTwitterHandle("3poienb6");
+        var result = _twitterScraper.pullTweetsFromTwitterHandle("3poienb6");
         assertFalse(result);
     }
 
@@ -41,7 +41,7 @@ public class TwitterScraperTest {
      */
     @Test
     public void pullTweetsFromTwitterHandle_EmptyTwitterHandle_RunsUnsuccessfully() {
-        var result = twitterScraper.pullTweetsFromTwitterHandle("");
+        var result = _twitterScraper.pullTweetsFromTwitterHandle("");
         assertFalse(result);
     }
 
@@ -50,7 +50,7 @@ public class TwitterScraperTest {
      */
     @Test
     public void pullTweetsFromTwitterHandle_NullTwitterHandle_RunsUnsuccessfully() {
-        var result = twitterScraper.pullTweetsFromTwitterHandle(null);
+        var result = _twitterScraper.pullTweetsFromTwitterHandle(null);
         assertFalse(result);
     }
 }

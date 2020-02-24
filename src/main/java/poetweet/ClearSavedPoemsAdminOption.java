@@ -1,13 +1,13 @@
 package poetweet;
 
-public class ClearResourcesAdminOption implements IMenuOption {
+public class ClearSavedPoemsAdminOption implements IMenuOption {
     private DirectoryClearer _directoryClearer;
 
     /**
      * Constructor.
      * @param directoryClearer A directory clearer.
      */
-    public ClearResourcesAdminOption(DirectoryClearer directoryClearer) {
+    public ClearSavedPoemsAdminOption(DirectoryClearer directoryClearer) {
         _directoryClearer = directoryClearer;
     }
 
@@ -16,7 +16,7 @@ public class ClearResourcesAdminOption implements IMenuOption {
      * @return Prompt for user consent
      */
     public String getOptionInstructions() {
-        return "Do you want to clear the resources folder. (yes/no)";
+        return "Do you want to clear the saved poems folder. (yes/no)";
     }
 
     /**
@@ -24,7 +24,7 @@ public class ClearResourcesAdminOption implements IMenuOption {
      * @return A general diagnosis of what went wrong.
      */
     public String getErrorMessage() {
-        return "To run this option, just type \'yes\' when it asks if you want to clear the resources folder.";
+        return "To run this option, just type \'yes\' when it asks if you want to clear the poems folder.";
     }
 
     /**
@@ -32,7 +32,7 @@ public class ClearResourcesAdminOption implements IMenuOption {
      * @return A short description of the menu option
      */
     public String getOptionDescription() {
-        return "Clean up Resources folder";
+        return "Clean up Saved Poems folder";
     }
 
     /**
@@ -40,7 +40,7 @@ public class ClearResourcesAdminOption implements IMenuOption {
      * @return The string that the option produced after execution.
      */
     public String getOptionResult() {
-        return "Cleared up all the resource files!";
+        return "Cleared up all the poem files!";
     }
 
     /**
@@ -54,7 +54,7 @@ public class ClearResourcesAdminOption implements IMenuOption {
             return null;
         }
 
-        _directoryClearer.clearDirectory("./resources");
+        _directoryClearer.clearDirectory("./poems");
 
         return new Success();
     }

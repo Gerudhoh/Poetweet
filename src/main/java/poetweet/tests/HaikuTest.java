@@ -7,7 +7,7 @@ import poetweet.Haiku;
 import static org.junit.Assert.assertEquals;
 
 public class HaikuTest {
-    private Haiku testHaiku;
+    private Haiku _testHaiku;
     private static final int EXPECTED_NUMLINES = 3;
     private static final Integer OUTER_LINE_SYLLABLES = 5;
     private static final Integer MIDDLE_LINE_SYLLABLES = 7;
@@ -18,7 +18,7 @@ public class HaikuTest {
      */
     @Before
     public void setup() {
-        testHaiku = new Haiku();
+        _testHaiku = new Haiku();
 
     }
 
@@ -28,7 +28,7 @@ public class HaikuTest {
     @Test
     public void testNumberLines() {
         System.out.println("Testing number of lines");
-        var actualNumLines = testHaiku.getNumberOfLines();
+        var actualNumLines = _testHaiku.getNumberOfLines();
         assertEquals(EXPECTED_NUMLINES, actualNumLines);
     }
 
@@ -37,7 +37,7 @@ public class HaikuTest {
      */
     @Test
     public void testSyllablesPerLine() {
-        var syllables = testHaiku.getSyllablesPerLine();
+        var syllables = _testHaiku.getSyllablesPerLine();
         assertEquals(OUTER_LINE_SYLLABLES, syllables.get(0));
         assertEquals(MIDDLE_LINE_SYLLABLES, syllables.get(1));
         assertEquals(OUTER_LINE_SYLLABLES, syllables.get(2));
@@ -48,7 +48,7 @@ public class HaikuTest {
      */
     @Test
     public void testRhymingScheme() {
-        var rhymes = testHaiku.getRhymingScheme();
+        var rhymes = _testHaiku.getRhymingScheme();
         for (var rhyme : rhymes) {
             assertEquals(RHYME, rhyme);
         }

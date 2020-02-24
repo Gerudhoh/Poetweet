@@ -11,8 +11,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 public class TweetParserTest {
-    private TweetParser tweetParser;
-    private String twitterHandle;
+    private TweetParser _tweetParser;
+    private String _twitterHandle;
     private static final int NUMPARSEDTWEETS = 6;
 
     /**
@@ -20,8 +20,8 @@ public class TweetParserTest {
      */
     @Before
     public void setUp() {
-        tweetParser = new TweetParser();
-        twitterHandle = "testfile";
+        _tweetParser = new TweetParser();
+        _twitterHandle = "testfile";
     }
 
     /**
@@ -29,7 +29,7 @@ public class TweetParserTest {
      */
     @Test
     public void parseTweets_goodTwitterHandle_RunsSuccessfully() {
-        var twitterData = doTheTweetParsing(twitterHandle);
+        var twitterData = doTheTweetParsing(_twitterHandle);
         var tweets = twitterData.getTweets();
         assertEquals(NUMPARSEDTWEETS, tweets.size());
     }
@@ -64,7 +64,7 @@ public class TweetParserTest {
     private TwitterData doTheTweetParsing(String handle) {
         TwitterData twitterData = null;
         try {
-            twitterData = tweetParser.parseTweets(handle);
+            twitterData = _tweetParser.parseTweets(handle);
         } catch (IOException e) {
             System.out.println(e.getStackTrace());
         }

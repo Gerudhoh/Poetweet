@@ -7,10 +7,10 @@ import poetweet.PoemLine;
 import static org.junit.Assert.assertEquals;
 
 public class PoemLineTest {
-    private PoemLine testLine1;
-    private PoemLine testLine2;
-    private String testString;
-    private String testString2;
+    private PoemLine _testLine1;
+    private PoemLine _testLine2;
+    private String _testString;
+    private String _testString2;
     private static final int LINETEST = 5;
 
     /**
@@ -18,10 +18,10 @@ public class PoemLineTest {
      */
     @Before
     public void setUp() {
-        testString = "To be or not to be";
-        testString2 = "The quality of mercy is not strained";
-        testLine1 = new PoemLine(LINETEST, 0);
-        testLine2 = new PoemLine(LINETEST, 0, testString2);
+        _testString = "To be or not to be";
+        _testString2 = "The quality of mercy is not strained";
+        _testLine1 = new PoemLine(LINETEST, 0);
+        _testLine2 = new PoemLine(LINETEST, 0, _testString2);
     }
 
     /**
@@ -29,7 +29,7 @@ public class PoemLineTest {
      */
     @Test
     public void getNumSyllables() {
-        var syllables = testLine1.getNumSyllables();
+        var syllables = _testLine1.getNumSyllables();
         assertEquals(LINETEST, syllables);
     }
 
@@ -38,7 +38,7 @@ public class PoemLineTest {
      */
     @Test
     public void getRhyme() {
-        var rhyme = testLine1.getRhyme();
+        var rhyme = _testLine1.getRhyme();
         assertEquals(0, rhyme);
     }
 
@@ -47,9 +47,9 @@ public class PoemLineTest {
      */
     @Test
     public void setLine() {
-        testLine1.setText("To be or not to be");
-        var line = testLine1.getText();
-        assertEquals(testString, line);
+        _testLine1.setText("To be or not to be");
+        var line = _testLine1.getText();
+        assertEquals(_testString, line);
     }
 
     /**
@@ -57,7 +57,7 @@ public class PoemLineTest {
      */
     @Test
     public void getLine() {
-        var line = testLine2.getText();
-        assertEquals(testString2, line);
+        var line = _testLine2.getText();
+        assertEquals(_testString2, line);
     }
 }
