@@ -6,7 +6,7 @@ before_script:
 
 build:
   stage: build
-  script: gradlew --build-cache assemble
+  script: gradle --build-cache assemble
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
@@ -16,7 +16,7 @@ build:
 
 check:
   stage: test
-  script: gradlew check
+  script: gradle check
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
@@ -32,15 +32,7 @@ check:
 
 test:
   stage: test
-  script: gradlew test
-
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: pull
-    paths:
-      - build
-      - .gradle
-
+  script: gradle test
   artifacts:
     reports:
       junit: build/test-results/test/**/TEST-*.xml
