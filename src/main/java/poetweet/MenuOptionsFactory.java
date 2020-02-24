@@ -38,12 +38,14 @@ public class MenuOptionsFactory {
      * @return An arrayList of all the things the system can do.
      */
     public ArrayList<IMenuOption> createPoetweetAdminMenuOptions() {
-        var clearResourcesAdminOption = new ClearResourcesAdminOption();
+        var clearResourcesAdminOption = new ClearResourcesAdminOption(new DirectoryClearer());
+        var clearPoemsAdminOption = new ClearSavedPoemsAdminOption(new DirectoryClearer());
         var quitOption = new QuitOption();
 
         var menuList = new ArrayList<IMenuOption>() {
             {
                 add(clearResourcesAdminOption);
+                add(clearPoemsAdminOption);
 
                 // Keep this at the bottom
                 add(quitOption);

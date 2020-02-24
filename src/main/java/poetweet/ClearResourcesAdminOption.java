@@ -1,9 +1,15 @@
 package poetweet;
 
-import java.io.File;
-import java.util.Arrays;
-
 public class ClearResourcesAdminOption implements IMenuOption {
+    private DirectoryClearer _directoryClearer;
+
+    /**
+     * Constructor.
+     * @param directoryClearer A directory clearer.
+     */
+    public ClearResourcesAdminOption(DirectoryClearer directoryClearer) {
+        _directoryClearer = directoryClearer;
+    }
 
     /**
      * Gets the option instructions.
@@ -48,8 +54,7 @@ public class ClearResourcesAdminOption implements IMenuOption {
             return null;
         }
 
-        Arrays.stream(new File("./resources").listFiles())
-                .forEach(File::delete);
+        _directoryClearer.clearDirectory("./resources");
 
         return new Success();
     }

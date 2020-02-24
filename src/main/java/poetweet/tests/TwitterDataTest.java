@@ -10,15 +10,15 @@ import static org.junit.Assert.assertEquals;
 
 
 public class TwitterDataTest {
-    private TwitterData testTwitterData;
-    private ArrayList<String> tweets;
+    private TwitterData _testTwitterData;
+    private ArrayList<String> _tweets;
 
     /**
      * This sets up all the tests.
      */
     @Before
     public void setUp() {
-        tweets = new ArrayList<>() {
+        _tweets = new ArrayList<>() {
             {
                 add("Snoosted and balloosted!");
                 add("Do you want to write unit tests with me? Hahaha jk. Unless...");
@@ -26,7 +26,7 @@ public class TwitterDataTest {
             }
         };
 
-        testTwitterData = new TwitterData("preciousHandle", tweets);
+        _testTwitterData = new TwitterData("preciousHandle", _tweets);
     }
 
     /**
@@ -34,7 +34,7 @@ public class TwitterDataTest {
      */
     @Test
     public void getTwitterHandle() {
-        var handle = testTwitterData.getTwitterHandle();
+        var handle = _testTwitterData.getTwitterHandle();
         assertEquals("preciousHandle", handle);
     }
 
@@ -43,7 +43,7 @@ public class TwitterDataTest {
      */
     @Test
     public void getTweets() {
-        var actualTweet = testTwitterData.getTweets();
-        assertEquals(tweets, actualTweet);
+        var actualTweet = _testTwitterData.getTweets();
+        assertEquals(_tweets, actualTweet);
     }
 }
