@@ -14,22 +14,6 @@ build:
       - build
       - .gradle
 
-check:
-  stage: check
-  script: gradle check
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: pull
-    paths:
-      - build
-      - .gradle
-
-  artifacts:
-    expose_as: "Checkstyle Results"
-    paths: ['build/reports/checkstyle/main.html']
-
-
-
 test:
   stage: test
   script: gradle test
