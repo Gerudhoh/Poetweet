@@ -26,7 +26,7 @@ build:
 
 test:
   stage: test
-    script:
+  script:
       - gradle test
     artifacts:
       reports:
