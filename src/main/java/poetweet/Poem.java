@@ -87,4 +87,24 @@ public abstract class Poem {
 
         return stringBuilder.toString();
     }
+
+    /**
+     * it's equals.
+     * @param obj object to compare to.
+     * @return true if they're equal, false if not.
+     */
+    public boolean equals(Object obj) {
+        var isPoem = obj instanceof Poem;
+        if (!isPoem) {
+            return false;
+        }
+
+        Poem other = (Poem) obj;
+        var linesMatch = getNumberOfLines() == other.getNumberOfLines();
+        var syllablesMatch = getSyllablesPerLine().equals(other.getSyllablesPerLine());
+        var rhymesMatch = getRhymingScheme().equals(other.getRhymingScheme());
+        var poemsMatch = toString().equals(other.toString());
+
+        return linesMatch && syllablesMatch && rhymesMatch && poemsMatch;
+    }
 }

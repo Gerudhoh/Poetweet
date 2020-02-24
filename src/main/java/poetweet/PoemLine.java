@@ -13,6 +13,7 @@ public class PoemLine {
     public PoemLine(int numSyllables, int rhyme) {
         _numSyllables = numSyllables;
         _rhyme = rhyme;
+        _text = "";
     }
 
     /**
