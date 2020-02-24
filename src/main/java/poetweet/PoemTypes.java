@@ -2,6 +2,7 @@ package poetweet;
 
 public enum PoemTypes {
     HAIKU("Haiku"),
+    FREEFORM("FreeForm"),
     SONNET("Sonnet");
 
     private String _poemType;

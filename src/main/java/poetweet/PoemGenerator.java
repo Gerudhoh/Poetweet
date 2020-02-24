@@ -48,41 +48,56 @@ public abstract class PoemGenerator {
             return false;
         }
 
-        generatePoemFromTwitterData(poem, twitterData);
+        var result = generatePoemFromTwitterData(poem, twitterData);
 
-        return true;
+        return result;
     }
 
-    private void generatePoemFromTwitterData(Poem poem, TwitterData twitterData) {
+    private boolean generatePoemFromTwitterData(Poem poem, TwitterData twitterData) {
         var usedIndexes = new ArrayList<Integer>();
         var tweets = twitterData.getTweets();
         var poemLines = poem.getPoem();
         var i = 0;
 
         while (i < poem.getNumberOfLines()) {
+            if(usedIndexes.size() == tweets.size()){
+                throw new Exceptions.NotEnoughTweetsException();
+            }
+
             var randomTweetIndex = RANDOM.nextInt(tweets.size());
+
+            if (usedIndexes.contains(randomTweetIndex)){
+                continue;
+            }
+
+            usedIndexes.add(randomTweetIndex);
             var generatedLine = generatePoemLine(poemLines.get(i), tweets.get(randomTweetIndex));
 
-            if (usedIndexes.contains(randomTweetIndex) || generatedLine.isEmpty()) {
+            if (generatedLine.isEmpty()) {
                 continue;
             }
 
             poemLines.get(i).setText(generatedLine);
-            usedIndexes.add(randomTweetIndex);
             i++;
         }
+
+        return true;
     }
 
     private String generatePoemLine(PoemLine poemLine, String tweet) {
         var wordsInTweet = tweet.split("\\s");
         var wordsForPoemLine = new StringBuilder();
         var syllablesRemaining = poemLine.getNumSyllables();
+        var syllablesInTweet = getTotalSyllables(wordsInTweet);
 
-        if (wordsInTweet.length - syllablesRemaining <= 0) {
+        if(syllablesInTweet < syllablesRemaining){
             return "";
         }
 
-        var randomWordIndex = RANDOM.nextInt(wordsInTweet.length - syllablesRemaining);
+        var randomWordIndex = wordsInTweet.length - syllablesRemaining > 0
+                ? RANDOM.nextInt(wordsInTweet.length - syllablesRemaining)
+                : 0;
+
         var wordsForLine = Arrays.copyOfRange(wordsInTweet, randomWordIndex, wordsInTweet.length);
 
         for (var word : wordsForLine) {
@@ -102,5 +117,15 @@ public abstract class PoemGenerator {
         return syllablesRemaining == 0
                 ? wordsForPoemLine.toString()
                 : "";
+    }
+
+    private int getTotalSyllables(String[] wordsInTweet){
+        int totalSyllables = 0;
+        for (var word : wordsInTweet) {
+            var count = SYLLABLE_COUNTER.count(word);
+            totalSyllables += count;
+        }
+
+        return totalSyllables;
     }
 }

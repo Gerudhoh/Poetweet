@@ -40,6 +40,9 @@ public class Poetweet extends Menu {
             } catch (Exceptions.PoetweetIOException pioe) {
                 System.out.println(pioe.getMessage());
                 returnedObject = null;
+            } catch (Exceptions.NotEnoughTweetsException nete) {
+                System.out.println(nete.getMessage());
+                returnedObject = null;
             }
 
             if (returnedObject == null) {

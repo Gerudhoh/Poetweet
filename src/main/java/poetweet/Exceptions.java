@@ -18,7 +18,7 @@ public class Exceptions {
     }
 
     /**
-     * Exception for when a yield value is invalid.
+     * My take on an IO exception.
      */
     protected static class PoetweetIOException extends RuntimeException {
         /**
@@ -26,6 +26,18 @@ public class Exceptions {
          */
         protected PoetweetIOException() {
             super();
+        }
+    }
+
+    /**
+     * Exception for when a dataset is too small to make a specific poem.
+     */
+    protected static class NotEnoughTweetsException extends RuntimeException {
+        /**
+         * Constructor.
+         */
+        protected NotEnoughTweetsException() {
+            super("There aren't enough tweets to turn into the specified poem. Please try a different user/poem type");
         }
     }
 

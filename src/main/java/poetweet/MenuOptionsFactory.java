@@ -13,9 +13,11 @@ public class MenuOptionsFactory {
         var twitterScraper = new TwitterScraper();
         var tweetParser = new TweetParser();
         var haiku = new Haiku();
+        var freeform = new FreeFormPoem(1, new Integer[]{1}, new Integer[]{0});
 
         var twitterScraperOption = new TwitterScraperOption(twitterScraper);
         var haikuGenerationOption = new HaikuGenerationOption(haiku, twitterScraper, tweetParser);
+        var freeFormGenerationOption = new FreeFormPoemGenerationOption(freeform, twitterScraper, tweetParser);
         var savePoemsMenuOption = new SavePoemsMenuOption();
         var quitOption = new QuitOption();
 
@@ -23,6 +25,7 @@ public class MenuOptionsFactory {
             {
                 add(twitterScraperOption);
                 add(haikuGenerationOption);
+                add(freeFormGenerationOption);
                 add(savePoemsMenuOption);
 
                 // Keep this at the bottom
