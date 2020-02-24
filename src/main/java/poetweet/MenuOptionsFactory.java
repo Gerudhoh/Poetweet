@@ -16,12 +16,14 @@ public class MenuOptionsFactory {
 
         var twitterScraperOption = new TwitterScraperOption(twitterScraper);
         var haikuGenerationOption = new HaikuGenerationOption(haiku, twitterScraper, tweetParser);
+        var savePoemsMenuOption = new SavePoemsMenuOption();
         var quitOption = new QuitOption();
 
         var menuList = new ArrayList<IMenuOption>() {
             {
                 add(twitterScraperOption);
                 add(haikuGenerationOption);
+                add(savePoemsMenuOption);
 
                 // Keep this at the bottom
                 add(quitOption);

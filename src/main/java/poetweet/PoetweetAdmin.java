@@ -18,24 +18,4 @@ public class PoetweetAdmin extends Menu {
         var poetweetAdmin = new PoetweetAdmin();
         poetweetAdmin.runProgram();
     }
-
-    /**
-     * Work-around for the dumb Java static main thingy.
-     */
-    public void runProgram() {
-        IReturnable userSelection;
-        printWelcome();
-
-        while (true) {
-            try {
-                userSelection = runMenu();
-            } catch (Exceptions.QuitException qe) {
-                 break;
-            }
-
-            if (userSelection == null) {
-                printErrorMessage();
-            }
-        }
-    }
 }

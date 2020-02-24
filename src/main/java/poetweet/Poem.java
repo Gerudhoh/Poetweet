@@ -2,7 +2,7 @@ package poetweet;
 
 import java.util.ArrayList;
 
-public abstract class Poem implements IReturnable {
+public abstract class Poem {
     private ArrayList<PoemLine> _poem;
 
     /**
@@ -15,6 +15,17 @@ public abstract class Poem implements IReturnable {
         _poem = new ArrayList<>();
         for (int i = 0; i < numberOfLines; i++) {
             _poem.add(new PoemLine(syllablesPerLine[i], rhymingScheme[i]));
+        }
+    }
+
+    /**
+     * Copy constructor for poem.
+     * @param poem The poem we're copying.
+     */
+    public Poem(Poem poem) {
+        _poem = new ArrayList<>();
+        for (var line : poem.getPoem()) {
+            _poem.add(new PoemLine(line.getNumSyllables(), line.getRhyme(), line.getText()));
         }
     }
 
@@ -75,5 +86,25 @@ public abstract class Poem implements IReturnable {
         }
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * it's equals.
+     * @param obj object to compare to.
+     * @return true if they're equal, false if not.
+     */
+    public boolean equals(Object obj) {
+        var isPoem = obj instanceof Poem;
+        if (!isPoem) {
+            return false;
+        }
+
+        Poem other = (Poem) obj;
+        var linesMatch = getNumberOfLines() == other.getNumberOfLines();
+        var syllablesMatch = getSyllablesPerLine().equals(other.getSyllablesPerLine());
+        var rhymesMatch = getRhymingScheme().equals(other.getRhymingScheme());
+        var poemsMatch = toString().equals(other.toString());
+
+        return linesMatch && syllablesMatch && rhymesMatch && poemsMatch;
     }
 }

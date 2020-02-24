@@ -17,18 +17,16 @@ public class Exceptions {
         }
     }
 
-    /*
     /**
      * Exception for when a yield value is invalid.
-     *
-    protected static class YieldInvalidException extends Exception {
+     */
+    protected static class PoetweetIOException extends RuntimeException {
         /**
          * Constructor.
-         * @param msg The message to contain in the exception.
-         *
-        protected YieldInvalidException(String msg) {
-            super(msg);
+         */
+        protected PoetweetIOException() {
+            super();
         }
     }
-    */
+
 }

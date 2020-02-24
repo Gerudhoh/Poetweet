@@ -18,4 +18,12 @@ public class Haiku extends Poem {
                 new Integer[]{RHYME, RHYME, RHYME}
               );
     }
+
+    /**
+     * Copy constructor for haiku.
+     * @param poem the poem we're copying.
+     */
+    public Haiku(Poem poem) {
+        super(poem);
+    }
 }

@@ -41,7 +41,7 @@ public abstract class PoemGenerator {
         try {
             twitterData = _tweetParser.parseTweets(twitterHandle);
         } catch (IOException e) {
-            return false;
+            throw new Exceptions.PoetweetIOException();
         }
 
         if (twitterData.getTweets().size() <= 0) {
@@ -67,7 +67,7 @@ public abstract class PoemGenerator {
                 continue;
             }
 
-            poemLines.get(i).setLine(generatedLine);
+            poemLines.get(i).setText(generatedLine);
             usedIndexes.add(randomTweetIndex);
             i++;
         }

@@ -16,24 +16,24 @@ public abstract class Menu {
     }
 
     /**
-     * Prints the welcome message.
+     * Main loop of the program.
      */
-    public void printWelcome() {
-        System.out.println("Welcome to");
-        System.out.println("   .-.                                                 ");
-        System.out.println("  (_) )-.                /                         /   ");
-        System.out.println("     /   \\  .-._. .-.---/---`)    (   .-.   .-.---/--- ");
-        System.out.println("    /     )(   )./.-'_ /    /  .   )./.-'_./.-'_ /     ");
-        System.out.println(" .-/  `--'  `-' (__.' /    (_.' `-' (__.' (__.' /      ");
-        System.out.println("(_/                                                    ");
-    }
+    public void runProgram() {
+        IReturnable returnedObject = null;
+        printWelcome();
+        var wantsToQuit = false;
 
-    /**
-     * Prints a clarification statement for the user.
-     */
-    public void printErrorMessage() {
-        System.out.println("\nSorry, it seems like you didn't select a valid menu option.");
-        System.out.println("Please select a number corresponding to an option from the list below:\n");
+        while (!wantsToQuit) {
+            try {
+                returnedObject = runMenu();
+            } catch (Exceptions.QuitException qe) {
+                wantsToQuit = true;
+            }
+
+            if (returnedObject == null) {
+                printErrorMessage();
+            }
+        }
     }
 
     /**
@@ -63,7 +63,7 @@ public abstract class Menu {
      * @return MenuOptions.VALID_OPTION_SUCCESS or MenuOptions.VALID_OPTION_FAILURE depending on whether
      * the menu option executed successfully
      */
-    private IReturnable runMenuOption(IMenuOption option) {
+    protected IReturnable runMenuOption(IMenuOption option) {
         System.out.println(option.getOptionInstructions());
         var input = _inputParser.getInput();
         var result = option.runMenuOption(input);
@@ -78,6 +78,27 @@ public abstract class Menu {
     }
 
     /**
+     * Prints the welcome message.
+     */
+    protected void printWelcome() {
+        System.out.println("Welcome to");
+        System.out.println("   .-.                                                 ");
+        System.out.println("  (_) )-.                /                         /   ");
+        System.out.println("     /   \\  .-._. .-.---/---`)    (   .-.   .-.---/--- ");
+        System.out.println("    /     )(   )./.-'_ /    /  .   )./.-'_./.-'_ /     ");
+        System.out.println(" .-/  `--'  `-' (__.' /    (_.' `-' (__.' (__.' /      ");
+        System.out.println("(_/                                                    ");
+    }
+
+    /**
+     * Prints a clarification statement for the user.
+     */
+    protected void printErrorMessage() {
+        System.out.println("\nSorry, it seems like you didn't select a valid menu option.");
+        System.out.println("Please select a number corresponding to an option from the list below:\n");
+    }
+
+    /**
      * Prints the menu options- basically what can you do with the program.
      */
     private void printMenuItems() {
@@ -86,4 +107,5 @@ public abstract class Menu {
             System.out.println(i++ + ". " + item.getOptionDescription());
         }
     }
+
 }
