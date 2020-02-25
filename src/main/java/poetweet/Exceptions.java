@@ -11,6 +11,7 @@ public class Exceptions {
     protected static class PoetweetException extends RuntimeException {
         /**
          * Constructor.
+         * @param message message.
          */
         protected PoetweetException(String message) {
             super(message);
@@ -35,6 +36,7 @@ public class Exceptions {
     public static class PoetweetIOException extends PoetweetException {
         /**
          * Constructor.
+         * @param msg message.
          */
         protected PoetweetIOException(String msg) {
             super(msg);
@@ -46,6 +48,7 @@ public class Exceptions {
     public static class PoetweetPathException extends PoetweetException {
         /**
          * Constructor.
+         * @param msg message.
          */
         protected PoetweetPathException(String msg) {
             super(msg);

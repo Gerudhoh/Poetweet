@@ -3,7 +3,6 @@ package poetweet;
 import eu.crydee.syllablecounter.SyllableCounter;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -56,13 +55,13 @@ public abstract class PoemGenerator {
         var i = 0;
 
         while (i < poem.getNumberOfLines()) {
-            if(usedIndexes.size() == tweets.size()){
+            if (usedIndexes.size() == tweets.size()) {
                 throw new Exceptions.NotEnoughTweetsException();
             }
 
             var randomTweetIndex = RANDOM.nextInt(tweets.size());
 
-            if (usedIndexes.contains(randomTweetIndex)){
+            if (usedIndexes.contains(randomTweetIndex)) {
                 continue;
             }
 
@@ -86,7 +85,7 @@ public abstract class PoemGenerator {
         var syllablesRemaining = poemLine.getNumSyllables();
         var syllablesInTweet = getTotalSyllables(wordsInTweet);
 
-        if(syllablesInTweet < syllablesRemaining){
+        if (syllablesInTweet < syllablesRemaining) {
             return "";
         }
 
@@ -115,7 +114,7 @@ public abstract class PoemGenerator {
                 : "";
     }
 
-    private int getTotalSyllables(String[] wordsInTweet){
+    private int getTotalSyllables(String[] wordsInTweet) {
         int totalSyllables = 0;
         for (var word : wordsInTweet) {
             var count = SYLLABLE_COUNTER.count(word);

@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenuOption {
     private FreeFormPoem _poem;
+    private static final int NUM_ARGS = 3;
 
     /**
      * Creates a HaikuGenerationOption object.
@@ -60,7 +61,7 @@ public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenu
     public IReturnable runMenuOption(String userInput) {
         var inputVariables = userInput.split(":");
 
-        if(inputVariables.length < 3){
+        if (inputVariables.length < NUM_ARGS) {
             return new Returnables.Faiure();
         }
 
@@ -75,7 +76,7 @@ public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenu
                 : new Returnables.Faiure();
     }
 
-    private void createFreeformPoemObject(String [] inputVariables){
+    private void createFreeformPoemObject(String[] inputVariables) {
         var numLines = Integer.parseInt(inputVariables[1]);
         var numSyllables = Integer.parseInt(inputVariables[2]);
 

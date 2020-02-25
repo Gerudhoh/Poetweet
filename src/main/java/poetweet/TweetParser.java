@@ -43,9 +43,9 @@ public class TweetParser {
                     }
 
                 });
-            } catch (InvalidPathException pe){
+            } catch (InvalidPathException pe) {
                 throw new Exceptions.PoetweetPathException(pe.getMessage());
-            } catch (IOException ioe){
+            } catch (IOException ioe) {
                 throw new Exceptions.PoetweetIOException("IO Exception: " + ioe.getMessage());
             }
 
