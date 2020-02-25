@@ -10,7 +10,6 @@ repositories {
     mavenCentral()
 }
 
-
 sourceSets {
 
     main.java.srcDirs = ['./src/tests/java/poetweet', './src/main/java/poetweet']
