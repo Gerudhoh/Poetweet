@@ -4,6 +4,20 @@ variables:
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
 
+lint:
+  stage: lint
+  script: gradle check
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build
+      - .gradle
+
+  artifacts:
+    expose_as: "Checkstyle Results"
+    paths: ['build/reports/checkstyle/main.html']
+
 build:
   stage: build
   script: gradle --build-cache assemble
