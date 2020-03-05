@@ -1,10 +1,7 @@
-package tests;
+package poetweet;
 
 import org.junit.Before;
 import org.junit.Test;
-import poetweet.Exceptions;
-import poetweet.TweetParser;
-import poetweet.TwitterData;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

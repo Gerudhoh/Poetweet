@@ -10,17 +10,28 @@ import java.util.Random;
 public abstract class PoemGenerator {
     private static final SyllableCounter SYLLABLE_COUNTER = new SyllableCounter();
     private static final Random RANDOM = new Random();
+    private ArrayList<PrintablePoem> _poems;
     private TweetParser _tweetParser;
     private TwitterScraper _twitterScraper;
 
     /**
      * Constructor for the PoemGenerator.
+     * @param poems an arraylist of all the poems created.
      * @param twitterScraper TwitterScraper
      * @param tweetParser TweetParser
      */
-    public PoemGenerator(TwitterScraper twitterScraper, TweetParser tweetParser) {
+    public PoemGenerator(ArrayList<PrintablePoem> poems, TwitterScraper twitterScraper, TweetParser tweetParser) {
+        _poems = poems;
         _twitterScraper = twitterScraper;
         _tweetParser = tweetParser;
+    }
+
+    /**
+     * Add a newly generated poem to the list of all poems.
+     * @param poem the poem to add.
+     */
+    protected void addNewPoemToList(PrintablePoem poem) {
+        _poems.add(poem);
     }
 
     /**

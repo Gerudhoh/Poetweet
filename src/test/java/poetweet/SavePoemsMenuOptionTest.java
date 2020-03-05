@@ -1,10 +1,9 @@
-package tests;
+package poetweet;
 
 import org.junit.Before;
 import org.junit.Test;
-import poetweet.PoemSaver;
-import poetweet.Returnables;
-import poetweet.SavePoemsMenuOption;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
 
@@ -18,7 +17,9 @@ public class SavePoemsMenuOptionTest {
      */
     @Before
     public void setUp() {
-        _savePoemsMenuOption = new SavePoemsMenuOption();
+        var poems = new ArrayList<PrintablePoem>();
+        var poemSaver = new PoemSaver();
+        _savePoemsMenuOption = new SavePoemsMenuOption(poems, poemSaver);
     }
 
     /**
@@ -27,7 +28,7 @@ public class SavePoemsMenuOptionTest {
     @Test
     public void runMenuOption_correctUSerInput_runsSuccessfully() {
         var result = _savePoemsMenuOption.runMenuOption(GOODINPUT);
-        assertTrue(result instanceof PoemSaver);
+        assertTrue(result == MenuOptionResult.VALID_OPTION_SUCCESS);
     }
 
     /**
@@ -36,6 +37,6 @@ public class SavePoemsMenuOptionTest {
     @Test
     public void runMenuOption_incorrectUSerInput_runsUnsuccessfully() {
         var result = _savePoemsMenuOption.runMenuOption(BADINPUT);
-        assertTrue(result instanceof Returnables.Faiure);
+        assertTrue(result == MenuOptionResult.VALID_OPTION_FAILURE);
     }
 }

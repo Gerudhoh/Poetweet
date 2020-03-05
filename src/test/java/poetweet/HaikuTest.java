@@ -1,8 +1,7 @@
-package tests;
+package poetweet;
 
 import org.junit.Before;
 import org.junit.Test;
-import poetweet.Haiku;
 
 import static org.junit.Assert.assertEquals;
 

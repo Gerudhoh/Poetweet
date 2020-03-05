@@ -5,11 +5,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public final class PoemSaver implements IPoemUsingReturnable {
-    @Override
-    public void execute(ArrayList<ReturnablePoem> returnablePoems) {
+public final class PoemSaver {
+
+    /**
+     * Save a list of poems.
+     * @param printablePoems the poems we're going to save.
+     */
+    public void savePoems(ArrayList<PrintablePoem> printablePoems) {
         var i = 1;
-        for (var returnablePoem : returnablePoems) {
+        for (var returnablePoem : printablePoems) {
             var poemContent = returnablePoem.getPoem().toString();
             var poemType = returnablePoem.getPoemType();
             var poemName = poemType.getType() + "_" + returnablePoem.getTwitterHandle() + i++ + ".txt";

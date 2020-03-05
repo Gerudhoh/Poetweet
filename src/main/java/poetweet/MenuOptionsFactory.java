@@ -10,15 +10,17 @@ public class MenuOptionsFactory {
      */
     public ArrayList<IMenuOption> createPoetweetMenuOptions() {
 
+        var poems = new ArrayList<PrintablePoem>();
         var twitterScraper = new TwitterScraper();
         var tweetParser = new TweetParser();
+        var poemSaver = new PoemSaver();
         var haiku = new Haiku();
         var freeform = new FreeFormPoem(1, new Integer[]{1}, new Integer[]{0});
 
         var twitterScraperOption = new TwitterScraperOption(twitterScraper);
-        var haikuGenerationOption = new HaikuGenerationOption(haiku, twitterScraper, tweetParser);
-        var freeFormGenerationOption = new FreeFormPoemGenerationOption(freeform, twitterScraper, tweetParser);
-        var savePoemsMenuOption = new SavePoemsMenuOption();
+        var haikuGenerationOption = new HaikuGenerationOption(haiku, poems, twitterScraper, tweetParser);
+        var freeFormGenerationOption = new FreeFormPoemGenerationOption(freeform, poems, twitterScraper, tweetParser);
+        var savePoemsMenuOption = new SavePoemsMenuOption(poems, poemSaver);
         var quitOption = new QuitOption();
 
         var menuList = new ArrayList<IMenuOption>() {

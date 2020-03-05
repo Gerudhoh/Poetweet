@@ -38,10 +38,10 @@ public class QuitOption implements IMenuOption {
      * @param userInput User's response to if they really wanna quit.
      * @return A coded value about the command's success.
      */
-    public IReturnable runMenuOption(String userInput) {
+    public MenuOptionResult runMenuOption(String userInput) {
         if (userInput.toLowerCase().equals("yes")) {
             throw new Exceptions.QuitException();
         }
-        return null;
+        return MenuOptionResult.VALID_OPTION_FAILURE;
     }
 }

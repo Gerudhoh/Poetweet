@@ -1,6 +1,20 @@
 package poetweet;
 
+import java.util.ArrayList;
+
 public final class SavePoemsMenuOption implements IMenuOption {
+    private ArrayList<PrintablePoem> _poems;
+    private PoemSaver _poemSaver;
+
+    /**
+     * Constructor.
+     * @param poems All the poems we'll want to save.
+     * @param poemSaver the poemsaver.
+     */
+    public SavePoemsMenuOption(ArrayList<PrintablePoem> poems, PoemSaver poemSaver) {
+        _poems = poems;
+        _poemSaver = poemSaver;
+    }
 
     /**
      * Getter for what you tell the user to do.
@@ -40,10 +54,12 @@ public final class SavePoemsMenuOption implements IMenuOption {
      * @return A coded value about the command's success.
      */
     @Override
-    public IReturnable runMenuOption(String userInput) {
+    public MenuOptionResult runMenuOption(String userInput) {
+        var result = MenuOptionResult.VALID_OPTION_FAILURE;
         if (userInput.toLowerCase().equals("all")) {
-            return new PoemSaver();
+            _poemSaver.savePoems(_poems);
+            result = MenuOptionResult.VALID_OPTION_SUCCESS;
         }
-        return new Returnables.Faiure();
+        return result;
     }
 }

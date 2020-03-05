@@ -1,16 +1,13 @@
-package tests;
+package poetweet;
 
 import org.junit.Before;
 import org.junit.Test;
-import poetweet.Haiku;
-import poetweet.PoemTypes;
-import poetweet.ReturnablePoem;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class ReturnablePoemTest {
-    private ReturnablePoem _returnablePoem;
+public class PrintablePoemTest {
+    private PrintablePoem _printablePoem;
     private Haiku _haiku;
     private String _handle;
 
@@ -21,7 +18,7 @@ public class ReturnablePoemTest {
     public void setUp() {
         _haiku = new Haiku();
         _handle = "snak3y_";
-        _returnablePoem = new ReturnablePoem(_haiku, PoemTypes.HAIKU, _handle);
+        _printablePoem = new PrintablePoem(_haiku, PoemTypes.HAIKU, _handle);
     }
 
     /**
@@ -29,7 +26,7 @@ public class ReturnablePoemTest {
      */
     @Test
     public void getPoemTest() {
-        var result = _returnablePoem.getPoem();
+        var result = _printablePoem.getPoem();
         assertTrue(_haiku.equals(result));
     }
 
@@ -38,7 +35,7 @@ public class ReturnablePoemTest {
      */
     @Test
     public void getPoemTypeTest() {
-        var result = _returnablePoem.getPoemType();
+        var result = _printablePoem.getPoemType();
         assertEquals(PoemTypes.HAIKU, result);
     }
 
@@ -47,7 +44,7 @@ public class ReturnablePoemTest {
      */
     @Test
     public void getTwitterHandleTest() {
-        var result = _returnablePoem.getTwitterHandle();
+        var result = _printablePoem.getTwitterHandle();
         assertEquals(_handle, result);
     }
 }

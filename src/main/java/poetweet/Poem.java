@@ -2,6 +2,26 @@ package poetweet;
 
 import java.util.ArrayList;
 
+enum PoemTypes {
+    FREEFORM("FreeForm"),
+    HAIKU("Haiku"),
+    SONNET("Sonnet");
+
+    private String _poemType;
+
+    PoemTypes(String poemType) {
+        _poemType = poemType;
+    }
+
+    /**
+     * Gets the string associated with the poem type.
+     * @return the string associated with the poem type.
+     */
+    public String getType() {
+        return _poemType;
+    }
+}
+
 public abstract class Poem {
     private ArrayList<PoemLine> _poem;
 
@@ -108,3 +128,4 @@ public abstract class Poem {
         return linesMatch && syllablesMatch && rhymesMatch && poemsMatch;
     }
 }
+

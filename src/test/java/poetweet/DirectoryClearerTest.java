@@ -1,8 +1,7 @@
-package tests;
+package poetweet;
 
 import org.junit.Before;
 import org.junit.Test;
-import poetweet.DirectoryClearer;
 
 import java.io.File;
 
