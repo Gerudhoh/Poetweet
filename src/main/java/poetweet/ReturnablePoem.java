@@ -19,6 +19,9 @@ public class ReturnablePoem implements IReturnable {
             case HAIKU:
                 _poem = new Haiku(poem);
                 break;
+            case FREEFORM:
+                _poem = new FreeFormPoem(poem);
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + _poemType);
         }

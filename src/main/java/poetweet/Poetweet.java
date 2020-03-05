@@ -37,12 +37,12 @@ public class Poetweet extends Menu {
                 returnedObject = runMenu();
             } catch (Exceptions.QuitException qe) {
                 break;
-            } catch (Exceptions.PoetweetIOException pioe) {
-                System.out.println(pioe.getMessage());
-                returnedObject = null;
+            } catch (Exceptions.PoetweetException pe) {
+                System.out.println(pe.getMessage());
+                returnedObject = new Returnables.ExceptionThrown();
             }
 
-            if (returnedObject == null) {
+            if (returnedObject == null || returnedObject instanceof Returnables.Faiure) {
                 printErrorMessage();
                 continue;
             }

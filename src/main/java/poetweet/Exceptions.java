@@ -8,6 +8,19 @@ public class Exceptions {
     /**
      * Exception for when the user wants to quit the program.
      */
+    protected static class PoetweetException extends RuntimeException {
+        /**
+         * Constructor.
+         * @param message message.
+         */
+        protected PoetweetException(String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * Exception for when the user wants to quit the program.
+     */
     protected static class QuitException extends RuntimeException {
         /**
          * Constructor.
@@ -18,14 +31,39 @@ public class Exceptions {
     }
 
     /**
-     * Exception for when a yield value is invalid.
+     * My take on an IO exception.
      */
-    protected static class PoetweetIOException extends RuntimeException {
+    public static class PoetweetIOException extends PoetweetException {
+        /**
+         * Constructor.
+         * @param msg message.
+         */
+        protected PoetweetIOException(String msg) {
+            super(msg);
+        }
+    }
+    /**
+     * My take on an IO exception.
+     */
+    public static class PoetweetPathException extends PoetweetException {
+        /**
+         * Constructor.
+         * @param msg message.
+         */
+        protected PoetweetPathException(String msg) {
+            super(msg);
+        }
+    }
+
+    /**
+     * Exception for when a dataset is too small to make a specific poem.
+     */
+    protected static class NotEnoughTweetsException extends PoetweetException {
         /**
          * Constructor.
          */
-        protected PoetweetIOException() {
-            super();
+        protected NotEnoughTweetsException() {
+            super("There aren't enough tweets to turn into the specified poem. Please try a different user/poem type");
         }
     }
 

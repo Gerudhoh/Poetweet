@@ -2,6 +2,7 @@ package poetweet;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -16,31 +17,37 @@ public class TweetParser {
      * Given a Twitter handle of a particular user, it locates the file of fetched tweets and parses them.
      * @param twitterHandle The twitter handle of a user whose tweets you want to parse.
      * @return A TwitterData object, which is just a DTO of parsed tweets and the user they belong to.
-     * @throws IOException I had to write this.
      */
-    public TwitterData parseTweets(String twitterHandle) throws IOException {
+    public TwitterData parseTweets(String twitterHandle) {
             ArrayList<String> parsedTweets = new ArrayList<>();
-            Path myPath = Paths.get("./resources/" + twitterHandle + "_tweets.csv");
-            List<String> lines = Files.readAllLines(myPath);
-            Pattern regex = Pattern.compile(REGEX);
+            try {
+                Path myPath = Paths.get("./resources/" + twitterHandle + "_tweets.csv");
 
-            lines.forEach((line) -> {
-                Matcher match = regex.matcher(line);
+                List<String> lines = Files.readAllLines(myPath);
+                Pattern regex = Pattern.compile(REGEX);
 
-                if (match.find()) {
-                    var tweet = match.group(1);
+                lines.forEach((line) -> {
+                    Matcher match = regex.matcher(line);
 
-                    if (tweet.contains("\\")) {
-                        tweet = tweet.replace("\\xe2\\x80\\x99", "\'");
-                        tweet = tweet.replace("\\xe2\\x80\\xa6", "...");
+                    if (match.find()) {
+                        var tweet = match.group(1);
+
+                        if (tweet.contains("\\")) {
+                            tweet = tweet.replace("\\xe2\\x80\\x99", "\'");
+                            tweet = tweet.replace("\\xe2\\x80\\xa6", "...");
+                        }
+
+                        if (!tweet.startsWith("RT")) {
+                            parsedTweets.add(tweet);
+                        }
                     }
 
-                    if (!tweet.startsWith("RT")) {
-                        parsedTweets.add(tweet);
-                    }
-                }
-
-            });
+                });
+            } catch (InvalidPathException pe) {
+                throw new Exceptions.PoetweetPathException(pe.getMessage());
+            } catch (IOException ioe) {
+                throw new Exceptions.PoetweetIOException("IO Exception: " + ioe.getMessage());
+            }
 
             return new TwitterData(twitterHandle, parsedTweets);
         }

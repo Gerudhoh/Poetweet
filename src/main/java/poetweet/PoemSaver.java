@@ -17,7 +17,7 @@ public final class PoemSaver implements IPoemUsingReturnable {
             try {
                 Files.write(Paths.get("./poems/" + poemName), poemContent.getBytes());
             } catch (IOException ioe) {
-                throw new Exceptions.PoetweetIOException();
+                throw new Exceptions.PoetweetIOException(ioe.getMessage());
             }
 
         }

@@ -12,7 +12,7 @@ repositories {
 
 sourceSets {
 
-    main.java.srcDirs = ['./src/main/java/poetweet/tests', './src/main/java/poetweet']
+    main.java.srcDirs = ['./src/tests/java/poetweet', './src/main/java/poetweet']
     test.java.srcDirs = ['.']
 
 }
@@ -31,8 +31,9 @@ dependencies {
 }
 
 test {
-    // Exclude this because I don't want it to run all the time because it deletes files
-    exclude '**/DirectoryClearerTest.class','**/TwitterScraperTest.class'
+
+    exclude '**/DirectoryClearerTest.class', // Exclude this bc I don't want it to run all the time bc it deletes files
+            '**/TwitterScraperTest.class'    // Exclude this bc it needs the machine to have tweepy installed
 
     testLogging {
         showStandardStreams = true
