@@ -38,9 +38,9 @@ public class TweetParserTest {
      */
     @Test
     public void parseTweets_badTwitterHandle_RunsUnsuccessfully() {
-        try{
+        try {
             doTheTweetParsing("");
-        }catch (Exceptions.PoetweetIOException pioe){
+        } catch (Exceptions.PoetweetIOException pioe) {
             assertTrue(pioe.getMessage().length() > 0);
         }
     }
@@ -50,9 +50,9 @@ public class TweetParserTest {
      */
     @Test
     public void parseTweets_emptyTwitterHandle_RunsUnsuccessfully() {
-        try{
+        try {
             doTheTweetParsing("");
-        }catch (Exceptions.PoetweetIOException pioe){
+        } catch (Exceptions.PoetweetIOException pioe) {
             assertTrue(pioe.getMessage().length() > 0);
         }
     }
@@ -62,9 +62,9 @@ public class TweetParserTest {
      */
     @Test
     public void parseTweets_nullTwitterHandle_RunsUnsuccessfully() {
-        try{
+        try {
             doTheTweetParsing(null);
-        }catch (Exceptions.PoetweetIOException pioe){
+        } catch (Exceptions.PoetweetIOException pioe) {
             assertTrue(pioe.getMessage().length() > 0);
         }
     }

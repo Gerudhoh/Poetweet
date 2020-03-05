@@ -19,6 +19,9 @@ public class FreeFormPoemGenerationOptionTest {
     private static final String GOODINPUT = "ProBirdRights:6:6";
     private  static final int EXPECTED = 6;
 
+    /**
+     * This sets up all the tests.
+     */
     @Before
     public void setUp() {
         var freeform = new FreeFormPoem(1, new Integer[]{1}, new Integer[]{0});
@@ -27,6 +30,9 @@ public class FreeFormPoemGenerationOptionTest {
         _freeformPoemGenerationOption = new FreeFormPoemGenerationOption(freeform, twitterScraper, tweetParser);
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
     public void generatePoem() {
         var result = _freeformPoemGenerationOption.runMenuOption(GOODINPUT);
@@ -38,6 +44,9 @@ public class FreeFormPoemGenerationOptionTest {
         assertFalse(poem.toString().isEmpty());
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
     public void runMenuOption_correctUserInput_runsSuccessfully() {
         var result = _freeformPoemGenerationOption.runMenuOption(GOODINPUT);
@@ -46,6 +55,9 @@ public class FreeFormPoemGenerationOptionTest {
         assertEquals(PoemTypes.FREEFORM, poem.getPoemType());
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
     public void runMenuOption_incorrectUserInput_runsUnsuccessfully() {
         var result = _freeformPoemGenerationOption.runMenuOption(BADINPUT);

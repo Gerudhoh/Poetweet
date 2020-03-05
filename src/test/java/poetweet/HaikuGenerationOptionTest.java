@@ -19,6 +19,9 @@ public class HaikuGenerationOptionTest {
     private static final String BADINPUT1 = "ProBirdRights:6:6";
     private static final String BADINPUT2 = "";
 
+    /**
+     * This sets up all things for the tests.
+     */
     @Before
     public void setUp() {
         var twitterScraper = new TwitterScraper();
@@ -26,6 +29,9 @@ public class HaikuGenerationOptionTest {
         _haikuGenerationOption = new HaikuGenerationOption(new Haiku(), twitterScraper, tweetParser);
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
     public void runMenuOption_correctUserInput_runsSuccessfully() {
         var result = _haikuGenerationOption.runMenuOption(GOODINPUT);
@@ -34,23 +40,29 @@ public class HaikuGenerationOptionTest {
         assertEquals(PoemTypes.HAIKU, poem.getPoemType());
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
     public void runMenuOption_incorrectUserInput_runsUnsuccessfully() {
-        try{
+        try {
             _haikuGenerationOption.runMenuOption(BADINPUT2);
-        } catch (Exceptions.PoetweetIOException pioe ) {
+        } catch (Exceptions.PoetweetIOException pioe) {
             assertTrue(pioe.getMessage().length() > 0);
         }
     }
 
+    /**
+     * This is a test. Read the method name to see what it tests.
+     */
     @Test
     public void runMenuOption_incorrectUserInput_runsUnsuccessfully_throwsInvalidPathException() {
-        try{
+        try {
             _haikuGenerationOption.runMenuOption(BADINPUT1);
-        } catch (Exceptions.PoetweetPathException ppe ) {
+        } catch (Exceptions.PoetweetPathException ppe) {
             assertEquals("Illegal char <:> at index 25: ./resources/ProBirdRights:6:6_tweets.csv",
                     ppe.getMessage());
-        } catch (Exceptions.PoetweetIOException pioe ) {
+        } catch (Exceptions.PoetweetIOException pioe) {
             assertTrue(pioe.getMessage().length() > 0);
         }
     }
