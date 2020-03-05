@@ -1,5 +1,6 @@
 package poetweet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenuOption {
@@ -9,11 +10,16 @@ public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenu
     /**
      * Creates a HaikuGenerationOption object.
      * @param poem A poem, for storing the completed poem.
+     * @param poems an arraylist of all the poems created.
      * @param twitterScraper A TwitterScraper, for pulling tweets.
      * @param tweetParser A TwitterParser, for parsing tweets.
      */
-    public FreeFormPoemGenerationOption(FreeFormPoem poem, TwitterScraper twitterScraper, TweetParser tweetParser) {
-        super(twitterScraper, tweetParser);
+    public FreeFormPoemGenerationOption(
+            FreeFormPoem poem,
+            ArrayList<PrintablePoem> poems,
+            TwitterScraper twitterScraper,
+            TweetParser tweetParser) {
+        super(poems, twitterScraper, tweetParser);
         _poem = poem;
     }
 
@@ -58,11 +64,11 @@ public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenu
      * @param userInput The twitter handle
      * @return The haiku.
      */
-    public IReturnable runMenuOption(String userInput) {
+    public MenuOptionResult runMenuOption(String userInput) {
         var inputVariables = userInput.split(":");
 
         if (inputVariables.length < NUM_ARGS) {
-            return new Returnables.Faiure();
+            return MenuOptionResult.VALID_OPTION_FAILURE;
         }
 
         var twitterHandle = inputVariables[0];
@@ -71,9 +77,14 @@ public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenu
 
         var result = generatePoem(_poem, twitterHandle);
 
-        return result
-                ? new ReturnablePoem(_poem, PoemTypes.FREEFORM, twitterHandle)
-                : new Returnables.Faiure();
+        if (!result) {
+            return MenuOptionResult.VALID_OPTION_FAILURE;
+        }
+
+        var poem = new PrintablePoem(_poem, PoemTypes.FREEFORM, twitterHandle);
+        addNewPoemToList(poem);
+
+        return MenuOptionResult.VALID_OPTION_SUCCESS;
     }
 
     private void createFreeformPoemObject(String[] inputVariables) {

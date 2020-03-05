@@ -1,9 +1,7 @@
-package tests;
+package poetweet;
 
 import org.junit.Before;
 import org.junit.Test;
-import poetweet.MenuOptionsFactory;
-import poetweet.QuitOption;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertEquals;

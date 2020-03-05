@@ -1,8 +1,7 @@
-package tests;
+package poetweet;
 
 import org.junit.Before;
 import org.junit.Test;
-import poetweet.TwitterData;
 
 import java.util.ArrayList;
 

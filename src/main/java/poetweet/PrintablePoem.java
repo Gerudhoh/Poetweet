@@ -1,6 +1,6 @@
 package poetweet;
 
-public class ReturnablePoem implements IReturnable {
+public class PrintablePoem {
     private Poem _poem;
     private PoemTypes _poemType;
     private String _twitterHandle;
@@ -11,7 +11,7 @@ public class ReturnablePoem implements IReturnable {
      * @param twitterHandle twitter handle of whose tweets became the poem.
      * @param poemType The type of poem that it is.
      */
-    public ReturnablePoem(Poem poem, PoemTypes poemType, String twitterHandle) {
+    public PrintablePoem(Poem poem, PoemTypes poemType, String twitterHandle) {
         _poemType = poemType;
         _twitterHandle = twitterHandle;
 

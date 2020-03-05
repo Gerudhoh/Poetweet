@@ -1,20 +1,16 @@
-package tests;
+package poetweet;
 
 import org.junit.Before;
 import org.junit.Test;
-import poetweet.Exceptions;
-import poetweet.Haiku;
-import poetweet.HaikuGenerationOption;
-import poetweet.PoemTypes;
-import poetweet.ReturnablePoem;
-import poetweet.TweetParser;
-import poetweet.TwitterScraper;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class HaikuGenerationOptionTest {
     private HaikuGenerationOption _haikuGenerationOption;
+    private ArrayList<PrintablePoem> _poems;
     private static final String  GOODINPUT = "ProBirdRights";
     private static final String BADINPUT1 = "ProBirdRights:6:6";
     private static final String BADINPUT2 = "";
@@ -26,7 +22,8 @@ public class HaikuGenerationOptionTest {
     public void setUp() {
         var twitterScraper = new TwitterScraper();
         var tweetParser = new TweetParser();
-        _haikuGenerationOption = new HaikuGenerationOption(new Haiku(), twitterScraper, tweetParser);
+        _poems = new ArrayList<>();
+        _haikuGenerationOption = new HaikuGenerationOption(new Haiku(), _poems, twitterScraper, tweetParser);
     }
 
     /**
@@ -35,8 +32,8 @@ public class HaikuGenerationOptionTest {
     @Test
     public void runMenuOption_correctUserInput_runsSuccessfully() {
         var result = _haikuGenerationOption.runMenuOption(GOODINPUT);
-        assertTrue(result instanceof ReturnablePoem);
-        var poem = (ReturnablePoem) result;
+        assertTrue(result == MenuOptionResult.VALID_OPTION_SUCCESS);
+        var poem = _poems.get(0);
         assertEquals(PoemTypes.HAIKU, poem.getPoemType());
     }
 

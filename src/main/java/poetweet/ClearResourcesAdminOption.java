@@ -48,14 +48,14 @@ public class ClearResourcesAdminOption implements IMenuOption {
      * @param userInput whatever information the user provided the system
      * @return A coded value about the command's success.
      */
-    public IReturnable runMenuOption(String userInput) {
+    public MenuOptionResult runMenuOption(String userInput) {
 
         if (userInput.indexOf("yes") < 0) {
-            return new Returnables.Faiure();
+            return MenuOptionResult.VALID_OPTION_FAILURE;
         }
 
         _directoryClearer.clearDirectory("./resources");
 
-        return new Returnables.Success();
+        return MenuOptionResult.VALID_OPTION_SUCCESS;
     }
 }

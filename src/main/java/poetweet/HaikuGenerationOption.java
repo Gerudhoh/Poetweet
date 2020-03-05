@@ -1,16 +1,23 @@
 package poetweet;
 
+import java.util.ArrayList;
+
 public class HaikuGenerationOption extends PoemGenerator implements IMenuOption {
     private Haiku _haiku;
 
     /**
      * Creates a HaikuGenerationOption object.
      * @param haiku A Haiku, for storing the completed poem.
+     * @param poems A list of all the poems we've created.
      * @param twitterScraper A TwitterScraper, for pulling tweets.
      * @param tweetParser A TwitterParser, for parsing tweets.
      */
-    public HaikuGenerationOption(Haiku haiku, TwitterScraper twitterScraper, TweetParser tweetParser) {
-        super(twitterScraper, tweetParser);
+    public HaikuGenerationOption(
+            Haiku haiku,
+            ArrayList<PrintablePoem> poems,
+            TwitterScraper twitterScraper,
+            TweetParser tweetParser) {
+        super(poems, twitterScraper, tweetParser);
         _haiku = haiku;
     }
 
@@ -53,11 +60,16 @@ public class HaikuGenerationOption extends PoemGenerator implements IMenuOption 
      * @param userInput The twitter handle
      * @return The haiku.
      */
-    public IReturnable runMenuOption(String userInput) {
-        var result = generatePoem(_haiku, userInput);
+    public MenuOptionResult runMenuOption(String userInput) {
+        var generatedPoemSuccess = generatePoem(_haiku, userInput);
 
-        return result
-                ? new ReturnablePoem(_haiku, PoemTypes.HAIKU, userInput)
-                : null;
+        if (!generatedPoemSuccess) {
+            return MenuOptionResult.VALID_OPTION_FAILURE;
+        }
+
+        var poem = new PrintablePoem(_haiku, PoemTypes.HAIKU, userInput);
+        addNewPoemToList(poem);
+
+        return MenuOptionResult.VALID_OPTION_SUCCESS;
     }
 }

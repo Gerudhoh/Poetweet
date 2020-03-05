@@ -2,6 +2,10 @@ package poetweet;
 
 import java.util.ArrayList;
 
+enum MenuOptionResult {
+    VALID_OPTION_SUCCESS, VALID_OPTION_FAILURE, INVALID_OPTION, QUIT, START
+}
+
 public abstract class Menu {
     private InputParser _inputParser;
     private ArrayList<IMenuOption> _menuItems;
@@ -19,18 +23,18 @@ public abstract class Menu {
      * Main loop of the program.
      */
     public void runProgram() {
-        IReturnable returnedObject = null;
+        var result = MenuOptionResult.START;
         printWelcome();
-        var wantsToQuit = false;
+        var menuResult = MenuOptionResult.START;
 
-        while (!wantsToQuit) {
+        while (menuResult != MenuOptionResult.QUIT) {
             try {
-                returnedObject = runMenu();
+                result = runMenu();
             } catch (Exceptions.QuitException qe) {
-                wantsToQuit = true;
+                menuResult = MenuOptionResult.QUIT;
             }
 
-            if (returnedObject == null) {
+            if (result == MenuOptionResult.INVALID_OPTION) {
                 printErrorMessage();
             }
         }
@@ -42,7 +46,7 @@ public abstract class Menu {
      * @return MenuOptions.VALID_OPTION or MenuOptions.INVALID_OPTION depending on the validity of
      *  the option selected by the user, or MenuOptions.QUIT if the user wants to quit the program
      */
-    public IReturnable runMenu() {
+    public MenuOptionResult runMenu() {
         printMenuItems();
         System.out.println("What would you like to do? (1-" + _menuItems.size() + ")");
 
@@ -53,7 +57,7 @@ public abstract class Menu {
             return runMenuOption(selectedOption);
         }
 
-        return null;
+        return MenuOptionResult.INVALID_OPTION;
     }
 
     /**
@@ -63,12 +67,12 @@ public abstract class Menu {
      * @return MenuOptions.VALID_OPTION_SUCCESS or MenuOptions.VALID_OPTION_FAILURE depending on whether
      * the menu option executed successfully
      */
-    protected IReturnable runMenuOption(IMenuOption option) {
+    protected MenuOptionResult runMenuOption(IMenuOption option) {
         System.out.println(option.getOptionInstructions());
         var input = _inputParser.getInput();
         var result = option.runMenuOption(input);
 
-        var message = result == null
+        var message = result == MenuOptionResult.VALID_OPTION_FAILURE
                 ? option.getErrorMessage()
                 : option.getOptionResult();
 

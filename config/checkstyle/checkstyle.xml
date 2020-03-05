@@ -168,7 +168,6 @@
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
         <module name="VisibilityModifier"/>
-        <module name="OneTopLevelClass" />
         <!-- Miscellaneous other checks.                   -->
         <!-- See https://checkstyle.org/config_misc.html -->
         <module name="ArrayTypeStyle"/>
