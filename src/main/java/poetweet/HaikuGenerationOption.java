@@ -18,6 +18,14 @@ public class HaikuGenerationOption extends PoemGenerationOption {
     }
 
     /**
+     * Gets the option description (For printing the menu).
+     * @return A short description of the Haiku Generation Option.
+     */
+    public String getOptionDescription() {
+        return "Generate a Haiku based off someone's tweets";
+    }
+
+    /**
      * Executes the specific user option.
      * @param userInput The twitter handle
      * @return The haiku.

@@ -16,6 +16,16 @@ public class QuatrainGenerationOption extends PoemGenerationOption {
         _poem = poem;
         _poemGenerator = poemGenerator;
     }
+
+    /**
+     * Gets the option description (For printing the menu).
+     * @return A short description of the Quatrain Generation Option.
+     */
+    public String getOptionDescription() {
+        return "Generate a Rhyming Quatrain3 based off someone's tweets";
+    }
+
+
     /**
      * Executes the specific user option.
      * @param userInput The twitter handle

@@ -25,13 +25,14 @@ public abstract class Menu {
     public void runProgram() {
         var result = MenuOptionResult.START;
         printWelcome();
-        var menuResult = MenuOptionResult.START;
 
-        while (menuResult != MenuOptionResult.QUIT) {
+        while (result != MenuOptionResult.QUIT) {
             try {
                 result = runMenu();
             } catch (Exceptions.QuitException qe) {
-                menuResult = MenuOptionResult.QUIT;
+                result = MenuOptionResult.QUIT;
+            } catch (Exceptions.PoetweetException e){
+                System.out.println(e.getMessage());
             }
 
             if (result == MenuOptionResult.INVALID_OPTION) {

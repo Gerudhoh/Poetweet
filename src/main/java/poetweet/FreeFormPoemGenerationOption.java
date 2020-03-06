@@ -23,39 +23,11 @@ public class FreeFormPoemGenerationOption extends PoemGenerationOption {
     }
 
     /**
-     * Gets the option instructions.
-     * @return What the user needs to do to generate a haiku.
-     */
-    public String getOptionInstructions() {
-        var instruction = "Please input the twitter handle, the poem's length & the number of syllables per line \n";
-        instruction +=  "Format: TwitterHandle:NumLinesInPoem:NumSyllablesPerLine (Example: @Hozier:10:10)";
-        return instruction;
-    }
-
-    /**
-     * Returns an error message.
-     * @return the error message.
-     */
-    public String getErrorMessage() {
-        var errorMessage = "Something went wrong, and the tweets were not able to be pulled. \n";
-        errorMessage +=  " Please make sure that the twitter account you want to see is public.";
-        return errorMessage;
-    }
-
-    /**
      * Gets the option description (For printing the menu).
      * @return A short description of the Free form poem Generation Option.
      */
     public String getOptionDescription() {
         return "Generate a Free Form Poem based off someone's tweets";
-    }
-
-    /**
-     * Gets the result of the poem generation- the poem.
-     * @return the haiku that was generate
-     */
-    public String getOptionResult() {
-        return "Your Poem:\n" +  _poem.toString();
     }
 
     /**

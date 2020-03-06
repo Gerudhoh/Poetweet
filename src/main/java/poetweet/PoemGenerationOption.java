@@ -32,14 +32,11 @@ public abstract class PoemGenerationOption implements IMenuOption {
         errorMessage +=  " Please make sure that the twitter account you want to see is public.";
         return errorMessage;
     }
-
     /**
      * Gets the option description (For printing the menu).
      * @return A short description of the Haiku Generation Option.
      */
-    public String getOptionDescription() {
-        return "Generate a Haiku based off someone's tweets";
-    }
+    public abstract String getOptionDescription();
 
     /**
      * Gets the result of the haiku generation- the haiku.

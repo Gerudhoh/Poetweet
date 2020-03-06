@@ -22,6 +22,9 @@ public class PrintablePoem {
             case FREEFORM:
                 _poem = new FreeFormPoem(poem);
                 break;
+            case QUATRAIN:
+                _poem = new Quatrain(poem);
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + _poemType);
         }
