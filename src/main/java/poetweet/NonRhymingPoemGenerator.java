@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public abstract class PoemGenerator {
+public final class NonRhymingPoemGenerator implements IPoemGenerator {
     private static final SyllableCounter SYLLABLE_COUNTER = new SyllableCounter();
     private static final Random RANDOM = new Random();
-    private ArrayList<PrintablePoem> _poems;
     private TweetParser _tweetParser;
     private TwitterScraper _twitterScraper;
 
@@ -20,18 +19,9 @@ public abstract class PoemGenerator {
      * @param twitterScraper TwitterScraper
      * @param tweetParser TweetParser
      */
-    public PoemGenerator(ArrayList<PrintablePoem> poems, TwitterScraper twitterScraper, TweetParser tweetParser) {
-        _poems = poems;
+    public NonRhymingPoemGenerator(ArrayList<PrintablePoem> poems, TwitterScraper twitterScraper, TweetParser tweetParser) {
         _twitterScraper = twitterScraper;
         _tweetParser = tweetParser;
-    }
-
-    /**
-     * Add a newly generated poem to the list of all poems.
-     * @param poem the poem to add.
-     */
-    protected void addNewPoemToList(PrintablePoem poem) {
-        _poems.add(poem);
     }
 
     /**
@@ -40,7 +30,7 @@ public abstract class PoemGenerator {
      * @param twitterHandle The twitter handle for the person whose tweets you want to turn into a poem.
      * @return true if it worked and false if something went wrong.
      */
-    protected boolean generatePoem(Poem poem, String twitterHandle) {
+    public boolean generatePoem(Poem poem, String twitterHandle) {
         TwitterData twitterData;
         var pulledTweets = new File("./resources/" + twitterHandle + "_tweets.csv");
 

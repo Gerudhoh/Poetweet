@@ -1,17 +1,13 @@
 package poetweet;
 
-import java.util.ArrayList;
-
 public class Poetweet extends Menu {
     private static final MenuOptionsFactory MENU_OPTIONS_FACTORY = new MenuOptionsFactory();
-    private ArrayList<PrintablePoem> _poems;
 
     /**
      * This is the constructor for the class that runs the program.
      */
     public Poetweet() {
         super(MENU_OPTIONS_FACTORY.createPoetweetMenuOptions());
-        _poems = new ArrayList<>();
     }
 
     /**

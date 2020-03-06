@@ -3,24 +3,23 @@ package poetweet;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenuOption {
+public class FreeFormPoemGenerationOption extends PoemGenerationOption {
     private FreeFormPoem _poem;
+    private IPoemGenerator _poemGenerator;
     private static final int NUM_ARGS = 3;
 
     /**
      * Creates a HaikuGenerationOption object.
      * @param poem A poem, for storing the completed poem.
      * @param poems an arraylist of all the poems created.
-     * @param twitterScraper A TwitterScraper, for pulling tweets.
-     * @param tweetParser A TwitterParser, for parsing tweets.
      */
     public FreeFormPoemGenerationOption(
             FreeFormPoem poem,
             ArrayList<PrintablePoem> poems,
-            TwitterScraper twitterScraper,
-            TweetParser tweetParser) {
-        super(poems, twitterScraper, tweetParser);
+            IPoemGenerator poemGenerator) {
+        super(poem, poems);
         _poem = poem;
+        _poemGenerator = poemGenerator;
     }
 
     /**
@@ -75,7 +74,7 @@ public class FreeFormPoemGenerationOption extends PoemGenerator implements IMenu
 
         createFreeformPoemObject(inputVariables);
 
-        var result = generatePoem(_poem, twitterHandle);
+        var result = _poemGenerator.generatePoem(_poem, twitterHandle);
 
         if (!result) {
             return MenuOptionResult.VALID_OPTION_FAILURE;

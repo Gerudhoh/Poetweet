@@ -5,6 +5,7 @@ import java.util.ArrayList;
 enum PoemTypes {
     FREEFORM("FreeForm"),
     HAIKU("Haiku"),
+    QUATRAIN("Quatrain"),
     SONNET("Sonnet");
 
     private String _poemType;
