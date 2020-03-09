@@ -3,8 +3,9 @@ package poetweet;
 import java.util.ArrayList;
 
 enum PoemTypes {
-    FREEFORM("FreeForm"),
+    FREEVERSE("FreeVerse"),
     HAIKU("Haiku"),
+    QUATRAIN("Quatrain"),
     SONNET("Sonnet");
 
     private String _poemType;

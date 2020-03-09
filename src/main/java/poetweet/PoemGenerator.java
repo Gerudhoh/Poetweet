@@ -7,31 +7,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public abstract class PoemGenerator {
+public abstract class PoemGenerator implements IPoemGenerator {
     private static final SyllableCounter SYLLABLE_COUNTER = new SyllableCounter();
     private static final Random RANDOM = new Random();
-    private ArrayList<PrintablePoem> _poems;
     private TweetParser _tweetParser;
     private TwitterScraper _twitterScraper;
 
     /**
-     * Constructor for the PoemGenerator.
-     * @param poems an arraylist of all the poems created.
-     * @param twitterScraper TwitterScraper
-     * @param tweetParser TweetParser
+     * Constructor.
+     * @param twitterScraper pulls tweets from internet.
+     * @param tweetParser Parses tweets.
      */
-    public PoemGenerator(ArrayList<PrintablePoem> poems, TwitterScraper twitterScraper, TweetParser tweetParser) {
-        _poems = poems;
+    public PoemGenerator(TwitterScraper twitterScraper, TweetParser tweetParser) {
         _twitterScraper = twitterScraper;
         _tweetParser = tweetParser;
-    }
-
-    /**
-     * Add a newly generated poem to the list of all poems.
-     * @param poem the poem to add.
-     */
-    protected void addNewPoemToList(PrintablePoem poem) {
-        _poems.add(poem);
     }
 
     /**
@@ -40,7 +29,7 @@ public abstract class PoemGenerator {
      * @param twitterHandle The twitter handle for the person whose tweets you want to turn into a poem.
      * @return true if it worked and false if something went wrong.
      */
-    protected boolean generatePoem(Poem poem, String twitterHandle) {
+    public boolean generatePoem(Poem poem, String twitterHandle) {
         TwitterData twitterData;
         var pulledTweets = new File("./resources/" + twitterHandle + "_tweets.csv");
 
@@ -59,38 +48,21 @@ public abstract class PoemGenerator {
         return result;
     }
 
-    private boolean generatePoemFromTwitterData(Poem poem, TwitterData twitterData) {
-        var usedIndexes = new ArrayList<Integer>();
-        var tweets = twitterData.getTweets();
-        var poemLines = poem.getPoem();
-        var i = 0;
+    /**
+     * Turn a bunch of tweets into a poem.
+     * @param poem The poem object, has info about type of poem, also where the final poem is stored.
+     * @param twitterData The tweets we're turning into a poem.
+     * @return Did it word? Yes (true) or no (false).
+     */
+    protected abstract boolean generatePoemFromTwitterData(Poem poem, TwitterData twitterData);
 
-        while (i < poem.getNumberOfLines()) {
-            if (usedIndexes.size() == tweets.size()) {
-                throw new Exceptions.NotEnoughTweetsException();
-            }
-
-            var randomTweetIndex = RANDOM.nextInt(tweets.size());
-
-            if (usedIndexes.contains(randomTweetIndex)) {
-                continue;
-            }
-
-            usedIndexes.add(randomTweetIndex);
-            var generatedLine = generatePoemLine(poemLines.get(i), tweets.get(randomTweetIndex));
-
-            if (generatedLine.isEmpty()) {
-                continue;
-            }
-
-            poemLines.get(i).setText(generatedLine);
-            i++;
-        }
-
-        return true;
-    }
-
-    private String generatePoemLine(PoemLine poemLine, String tweet) {
+    /**
+     * Generate one line of a poem from one tweet.
+     * @param poemLine The poem line object, has info about the line itself.
+     * @param tweet The tweet we'll use to turn into poetry.
+     * @return The string that we'll set to the poem line.
+     */
+    protected String generatePoemLine(PoemLine poemLine, String tweet) {
         var wordsInTweet = tweet.split("\\s");
         var wordsForPoemLine = new StringBuilder();
         var syllablesRemaining = poemLine.getNumSyllables();
@@ -125,7 +97,12 @@ public abstract class PoemGenerator {
                 : "";
     }
 
-    private int getTotalSyllables(String[] wordsInTweet) {
+    /**
+     * Gets the total amount of syllables in an entire tweet.
+     * @param wordsInTweet array of all the words in the tweet.
+     * @return the total amount of syllables.
+     */
+    protected int getTotalSyllables(String[] wordsInTweet) {
         int totalSyllables = 0;
         for (var word : wordsInTweet) {
             var count = SYLLABLE_COUNTER.count(word);
@@ -134,4 +111,30 @@ public abstract class PoemGenerator {
 
         return totalSyllables;
     }
+
+    /**
+     * Gets a random tweet (that we haven't already selected).
+     * @param tweets All the tweets.
+     * @param usedIndexes All the indexes for tweets that we've already looked at.
+     * @return The random tweet.
+     */
+    protected String getRandomTweet(ArrayList<String> tweets, ArrayList<Integer> usedIndexes) {
+        var randomTweetIndex = 0;
+
+        while (true) {
+            if (usedIndexes.size() >= tweets.size()) {
+                throw new Exceptions.NotEnoughTweetsException();
+            }
+
+            randomTweetIndex = RANDOM.nextInt(tweets.size());
+
+            if (!usedIndexes.contains(randomTweetIndex)) {
+                usedIndexes.add(randomTweetIndex);
+                break;
+            }
+        }
+
+        return tweets.get(randomTweetIndex);
+    }
+
 }

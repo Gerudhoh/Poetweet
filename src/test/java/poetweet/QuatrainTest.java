@@ -5,22 +5,19 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class FreeFormPoemTest {
-    private FreeFormPoem _testFreeFormPoem;
+public class QuatrainTest {
+    private Quatrain _quatrain;
     private static final int EXPECTED_NUMLINES = 4;
-    private static final Integer SYLLABLES = 5;
-    private static final Integer RHYME = 0;
+    private static final Integer SYLLABLES = 10;
+    private static final Integer A = 1;
+    private static final Integer B = 2;
 
     /**
      * This sets up all the tests.
      */
     @Before
     public void setup() {
-        _testFreeFormPoem = new FreeFormPoem(
-                EXPECTED_NUMLINES,
-                new Integer[]{SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES},
-                new Integer[]{RHYME, RHYME, RHYME, RHYME});
-
+        _quatrain = new Quatrain();
     }
 
     /**
@@ -29,7 +26,7 @@ public class FreeFormPoemTest {
     @Test
     public void testNumberLines() {
         System.out.println("Testing number of lines");
-        var actualNumLines = _testFreeFormPoem.getNumberOfLines();
+        var actualNumLines = _quatrain.getNumberOfLines();
         assertEquals(EXPECTED_NUMLINES, actualNumLines);
     }
 
@@ -38,8 +35,8 @@ public class FreeFormPoemTest {
      */
     @Test
     public void testSyllablesPerLine() {
-        var syllables = _testFreeFormPoem.getSyllablesPerLine();
-        for (var syllable: syllables) {
+        var syllables = _quatrain.getSyllablesPerLine();
+        for (var syllable : syllables) {
             assertEquals(SYLLABLES, syllable);
         }
     }
@@ -49,9 +46,13 @@ public class FreeFormPoemTest {
      */
     @Test
     public void testRhymingScheme() {
-        var rhymes = _testFreeFormPoem.getRhymingScheme();
-        for (var rhyme : rhymes) {
-            assertEquals(RHYME, rhyme);
+        var rhymes = _quatrain.getRhymingScheme();
+        for (int i = 0; i < EXPECTED_NUMLINES; i++) {
+            if (i % 2 == 0) {
+                assertEquals(A, rhymes.get(i));
+            } else {
+                assertEquals(B, rhymes.get(i));
+            }
         }
     }
 }

@@ -13,13 +13,17 @@ public class MenuOptionsFactory {
         var poems = new ArrayList<PrintablePoem>();
         var twitterScraper = new TwitterScraper();
         var tweetParser = new TweetParser();
+        var poemGenerator = new NonRhymingPoemGenerator(twitterScraper, tweetParser);
+        var rhymingPoemGenerator = new RhymingPoemGenerator(twitterScraper, tweetParser);
         var poemSaver = new PoemSaver();
         var haiku = new Haiku();
-        var freeform = new FreeFormPoem(1, new Integer[]{1}, new Integer[]{0});
+        var quatrain = new Quatrain();
+        var freeverse = new FreeVersePoem(1, new Integer[]{1}, new Integer[]{0});
 
         var twitterScraperOption = new TwitterScraperOption(twitterScraper);
-        var haikuGenerationOption = new HaikuGenerationOption(haiku, poems, twitterScraper, tweetParser);
-        var freeFormGenerationOption = new FreeFormPoemGenerationOption(freeform, poems, twitterScraper, tweetParser);
+        var haikuGenerationOption = new HaikuGenerationOption(haiku, poems, poemGenerator);
+        var quatrainGenerationOption = new QuatrainGenerationOption(quatrain, poems, rhymingPoemGenerator);
+        var freeVersePoemGenerationOption = new FreeVersePoemGenerationOption(freeverse, poems, poemGenerator);
         var savePoemsMenuOption = new SavePoemsMenuOption(poems, poemSaver);
         var quitOption = new QuitOption();
 
@@ -27,7 +31,8 @@ public class MenuOptionsFactory {
             {
                 add(twitterScraperOption);
                 add(haikuGenerationOption);
-                add(freeFormGenerationOption);
+                add(quatrainGenerationOption);
+                add(freeVersePoemGenerationOption);
                 add(savePoemsMenuOption);
 
                 // Keep this at the bottom

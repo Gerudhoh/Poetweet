@@ -1,6 +1,6 @@
 package poetweet;
 
-public class ClearSavedPoemsAdminOption implements IMenuOption {
+public final class ClearSavedPoemsAdminOption implements IMenuOption {
     private DirectoryClearer _directoryClearer;
 
     /**
