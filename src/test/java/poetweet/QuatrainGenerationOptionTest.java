@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class HaikuGenerationOptionTest {
-    private HaikuGenerationOption _haikuGenerationOption;
+public class QuatrainGenerationOptionTest {
+    private QuatrainGenerationOption _quatrainGenerationOption;
     private ArrayList<PrintablePoem> _poems;
     private static final String  GOODINPUT = "ProBirdRights";
     private static final String BADINPUT1 = "ProBirdRights:6:6";
@@ -22,9 +22,9 @@ public class HaikuGenerationOptionTest {
     public void setUp() {
         var twitterScraper = new TwitterScraper();
         var tweetParser = new TweetParser();
-        var poemGenerator = new NonRhymingPoemGenerator(twitterScraper, tweetParser);
+        var poemGenerator = new RhymingPoemGenerator(twitterScraper, tweetParser);
         _poems = new ArrayList<>();
-        _haikuGenerationOption = new HaikuGenerationOption(new Haiku(), _poems, poemGenerator);
+        _quatrainGenerationOption = new QuatrainGenerationOption(new Quatrain(), _poems, poemGenerator);
     }
 
     /**
@@ -32,10 +32,10 @@ public class HaikuGenerationOptionTest {
      */
     @Test
     public void runMenuOption_correctUserInput_runsSuccessfully() {
-        var result = _haikuGenerationOption.runMenuOption(GOODINPUT);
+        var result = _quatrainGenerationOption.runMenuOption(GOODINPUT);
         assertTrue(result == MenuOptionResult.VALID_OPTION_SUCCESS);
         var poem = _poems.get(0);
-        assertEquals(PoemTypes.HAIKU, poem.getPoemType());
+        assertEquals(PoemTypes.QUATRAIN, poem.getPoemType());
     }
 
     /**
@@ -44,7 +44,7 @@ public class HaikuGenerationOptionTest {
     @Test
     public void runMenuOption_incorrectUserInput_runsUnsuccessfully() {
         try {
-            _haikuGenerationOption.runMenuOption(BADINPUT2);
+            _quatrainGenerationOption.runMenuOption(BADINPUT2);
         } catch (Exception e) {
             assertTrue(e instanceof Exceptions.PoetweetIOException);
         }
@@ -56,7 +56,7 @@ public class HaikuGenerationOptionTest {
     @Test
     public void runMenuOption_incorrectUserInput_runsUnsuccessfully_throwsInvalidPathException() {
         try {
-            _haikuGenerationOption.runMenuOption(BADINPUT1);
+            _quatrainGenerationOption.runMenuOption(BADINPUT1);
         } catch (Exceptions.PoetweetPathException ppe) {
             assertEquals("Illegal char <:> at index 25: ./resources/ProBirdRights:6:6_tweets.csv",
                     ppe.getMessage());

@@ -9,8 +9,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class FreeFormPoemGenerationOptionTest {
-    private FreeFormPoemGenerationOption _freeformPoemGenerationOption;
+public class FreeVersePoemGenerationOptionTest {
+    private FreeVersePoemGenerationOption _freeformPoemGenerationOption;
     private ArrayList<PrintablePoem> _poems;
     private static final String BADINPUT = "ProBirdRights";
     private static final String GOODINPUT = "ProBirdRights:6:6";
@@ -21,11 +21,12 @@ public class FreeFormPoemGenerationOptionTest {
      */
     @Before
     public void setUp() {
-        var freeform = new FreeFormPoem(1, new Integer[]{1}, new Integer[]{0});
+        var freeform = new FreeVersePoem(1, new Integer[]{1}, new Integer[]{0});
         var twitterScraper = new TwitterScraper();
         var tweetParser = new TweetParser();
+        var poemGenerator = new NonRhymingPoemGenerator(twitterScraper, tweetParser);
         _poems = new ArrayList<>();
-        _freeformPoemGenerationOption = new FreeFormPoemGenerationOption(freeform, _poems, twitterScraper, tweetParser);
+        _freeformPoemGenerationOption = new FreeVersePoemGenerationOption(freeform, _poems, poemGenerator);
     }
 
     /**
@@ -48,7 +49,7 @@ public class FreeFormPoemGenerationOptionTest {
         var result = _freeformPoemGenerationOption.runMenuOption(GOODINPUT);
         assertEquals(MenuOptionResult.VALID_OPTION_SUCCESS, result);
         var poem = _poems.get(0);
-        assertEquals(PoemTypes.FREEFORM, poem.getPoemType());
+        assertEquals(PoemTypes.FREEVERSE, poem.getPoemType());
     }
 
     /**

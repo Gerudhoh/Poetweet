@@ -1,6 +1,6 @@
 package poetweet;
 
-public class ClearResourcesAdminOption implements IMenuOption {
+public final class ClearResourcesAdminOption implements IMenuOption {
     private DirectoryClearer _directoryClearer;
 
     /**

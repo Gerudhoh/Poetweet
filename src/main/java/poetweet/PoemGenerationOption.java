@@ -8,6 +8,7 @@ public abstract class PoemGenerationOption implements IMenuOption {
 
     /**
      * Constructor.
+     * @param poem A poem.
      * @param poems A list of all the poems we've created.
      */
     public PoemGenerationOption(Poem poem, ArrayList<PrintablePoem> poems) {
@@ -47,6 +48,13 @@ public abstract class PoemGenerationOption implements IMenuOption {
     }
 
     /**
+     * Executes the specific user option.
+     * @param userInput The twitter handle
+     * @return The haiku.
+     */
+    public abstract MenuOptionResult runMenuOption(String userInput);
+
+    /**
      * Add a newly generated poem to the list of all poems.
      * @param poem the poem to add.
      */
@@ -55,9 +63,11 @@ public abstract class PoemGenerationOption implements IMenuOption {
     }
 
     /**
-     * Executes the specific user option.
-     * @param userInput The twitter handle
-     * @return The haiku.
+     * Setter for _poem.
+     * @param poem poem to set _poem to.
      */
-    public abstract MenuOptionResult runMenuOption(String userInput);
+    protected void setPoem(Poem poem) {
+        _poem = poem;
+    }
+
 }

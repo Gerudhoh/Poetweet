@@ -19,8 +19,8 @@ public class PrintablePoem {
             case HAIKU:
                 _poem = new Haiku(poem);
                 break;
-            case FREEFORM:
-                _poem = new FreeFormPoem(poem);
+            case FREEVERSE:
+                _poem = new FreeVersePoem(poem);
                 break;
             case QUATRAIN:
                 _poem = new Quatrain(poem);

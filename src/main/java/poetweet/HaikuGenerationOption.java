@@ -10,6 +10,7 @@ public class HaikuGenerationOption extends PoemGenerationOption {
      * Creates a HaikuGenerationOption object.
      * @param haiku A Haiku, for storing the completed poem.
      * @param poems A list of all the poems we've created.
+     * @param poemGenerator the poem generator object (rhyming or non-rhyming)
      */
     public HaikuGenerationOption(Haiku haiku, ArrayList<PrintablePoem> poems, IPoemGenerator poemGenerator) {
         super(haiku, poems);

@@ -10,6 +10,7 @@ public class QuatrainGenerationOption extends PoemGenerationOption {
      * Creates a QuatrainGenerationOption object.
      * @param poem A Quatrain, for storing the completed poem.
      * @param poems A list of all the poems we've created.
+     * @param poemGenerator the poem generator.
      */
     public QuatrainGenerationOption(Quatrain poem, ArrayList<PrintablePoem> poems, IPoemGenerator poemGenerator) {
         super(poem, poems);

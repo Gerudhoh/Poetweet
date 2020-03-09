@@ -31,7 +31,7 @@ public abstract class Menu {
                 result = runMenu();
             } catch (Exceptions.QuitException qe) {
                 result = MenuOptionResult.QUIT;
-            } catch (Exceptions.PoetweetException e){
+            } catch (Exceptions.PoetweetException e) {
                 System.out.println(e.getMessage());
             }
 

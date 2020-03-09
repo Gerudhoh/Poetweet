@@ -3,8 +3,8 @@ package poetweet;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FreeFormPoemGenerationOption extends PoemGenerationOption {
-    private FreeFormPoem _poem;
+public final class FreeVersePoemGenerationOption extends PoemGenerationOption {
+    private FreeVersePoem _poem;
     private IPoemGenerator _poemGenerator;
     private static final int NUM_ARGS = 3;
 
@@ -12,9 +12,10 @@ public class FreeFormPoemGenerationOption extends PoemGenerationOption {
      * Creates a HaikuGenerationOption object.
      * @param poem A poem, for storing the completed poem.
      * @param poems an arraylist of all the poems created.
+     * @param poemGenerator the poem generator object (rhyming or non-rhyming)
      */
-    public FreeFormPoemGenerationOption(
-            FreeFormPoem poem,
+    public FreeVersePoemGenerationOption(
+            FreeVersePoem poem,
             ArrayList<PrintablePoem> poems,
             IPoemGenerator poemGenerator) {
         super(poem, poems);
@@ -23,11 +24,21 @@ public class FreeFormPoemGenerationOption extends PoemGenerationOption {
     }
 
     /**
+     * Gets the option instructions.
+     * @return What the user needs to do to generate a haiku.
+     */
+    public String getOptionInstructions() {
+        var instruction = "Please input the twitter handle, the poem's length & the number of syllables per line \n";
+        instruction +=  "Format: TwitterHandle:NumLinesInPoem:NumSyllablesPerLine (Example: @Hozier:10:10)";
+        return instruction;
+    }
+
+    /**
      * Gets the option description (For printing the menu).
-     * @return A short description of the Free form poem Generation Option.
+     * @return A short description of the Free verse poem Generation Option.
      */
     public String getOptionDescription() {
-        return "Generate a Free Form Poem based off someone's tweets";
+        return "Generate a Free Verse Poem based off someone's tweets";
     }
 
     /**
@@ -52,7 +63,7 @@ public class FreeFormPoemGenerationOption extends PoemGenerationOption {
             return MenuOptionResult.VALID_OPTION_FAILURE;
         }
 
-        var poem = new PrintablePoem(_poem, PoemTypes.FREEFORM, twitterHandle);
+        var poem = new PrintablePoem(_poem, PoemTypes.FREEVERSE, twitterHandle);
         addNewPoemToList(poem);
 
         return MenuOptionResult.VALID_OPTION_SUCCESS;
@@ -68,6 +79,7 @@ public class FreeFormPoemGenerationOption extends PoemGenerationOption {
         var rhymes = new Integer[numLines];
         Arrays.fill(rhymes, 0);
 
-        _poem = new FreeFormPoem(numLines, syllables, rhymes);
+        _poem = new FreeVersePoem(numLines, syllables, rhymes);
+        setPoem(_poem);
     }
 }
