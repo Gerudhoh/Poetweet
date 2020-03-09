@@ -8,6 +8,7 @@ targetCompatibility = 1.11
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 sourceSets {
@@ -19,6 +20,7 @@ sourceSets {
 
 dependencies {
     implementation('eu.crydee:syllable-counter:4.1.0')
+    compile 'ca.rmen:rhymer:1.2.0'
     implementation('org.testng:testng:6.9.6')
     testImplementation(
             'junit:junit:4.12',
@@ -33,6 +35,8 @@ dependencies {
 test {
 
     exclude '**/DirectoryClearerTest.class', // Exclude this bc I don't want it to run all the time bc it deletes files
+            '**/ClearResourcesAdminOptionTest.class', // Exclude this bc I don't want it to run all the time bc it deletes files
+            '**/ClearSavedPoemsAdminOptionTest.class', // Exclude this bc I don't want it to run all the time bc it deletes files
             '**/TwitterScraperTest.class'    // Exclude this bc it needs the machine to have tweepy installed
 
     testLogging {
