@@ -23,7 +23,7 @@ public class QuatrainGenerationOption extends PoemGenerationOption {
      * @return A short description of the Quatrain Generation Option.
      */
     public String getOptionDescription() {
-        return "Generate a Rhyming Quatrain3 based off someone's tweets";
+        return "Generate a Rhyming Quatrain based off someone's tweets";
     }
 
 

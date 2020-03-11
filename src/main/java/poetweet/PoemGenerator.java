@@ -63,7 +63,7 @@ public abstract class PoemGenerator implements IPoemGenerator {
      * @return The string that we'll set to the poem line.
      */
     protected String generatePoemLine(PoemLine poemLine, String tweet) {
-        var wordsInTweet = tweet.split("\\s");
+        var wordsInTweet = tweet.split("[ \\\\n]");
         var wordsForPoemLine = new StringBuilder();
         var syllablesRemaining = poemLine.getNumSyllables();
         var syllablesInTweet = getTotalSyllables(wordsInTweet);

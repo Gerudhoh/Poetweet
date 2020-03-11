@@ -11,12 +11,12 @@ repositories {
     jcenter()
 }
 
+/*
 sourceSets {
-
-    main.java.srcDirs = ['./src/tests/java/poetweet', './src/main/java/poetweet']
-    test.java.srcDirs = ['.']
-
+    main.java.srcDirs = ['./src/main/java/poetweet']
+    test.java.srcDirs = ['./src/test/java/poetweet']
 }
+ */
 
 dependencies {
     implementation('eu.crydee:syllable-counter:4.1.0')
