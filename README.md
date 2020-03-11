@@ -131,7 +131,17 @@ While I strived to follow this principle in all my classes, the place where this
   
   - FreeVerseGenerationOption.java is a good example of extending the functionality of PoemGenerationOption
 
+### Improvements
 
+- I was told that I had a lot of classes, and it was suggested that I "Grouping together classes and enums or adding another function to an existing class (rather than making a new class for it) could help readability." 
+
+  - In responding to this feedback I nested my 2 enums,  MenuOptionResult and PoemTypes, within the files of the classes that use them the most, Menu.java and Poem.java respectively.
+
+- Additionally, I was told that I "Might want to think about combining a few of the very small classes for maintainability."
+
+  - Bearing this in mind, I wrote my Exceptions Class
+
+    
 
 (ALSO FYI the syllable counter library that I used is buggy :( There's an issue on github about it, don't blame me.)
 
