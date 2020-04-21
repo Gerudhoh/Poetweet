@@ -6,7 +6,8 @@ enum PoemTypes {
     FREEVERSE("FreeVerse"),
     HAIKU("Haiku"),
     QUATRAIN("Quatrain"),
-    SONNET("Sonnet");
+    SONNET("Sonnet"),
+    VILLANELLE("Villanelle");
 
     private String _poemType;
 

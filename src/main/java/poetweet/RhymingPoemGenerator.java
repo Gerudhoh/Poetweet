@@ -13,7 +13,7 @@ import java.util.Map;
 
 public final class RhymingPoemGenerator extends PoemGenerator {
     private static final SyllableCounter SYLLABLE_COUNTER = new SyllableCounter();
-    private static final int MINIMUM_APPLICABLE_TWEETS = 3;
+    private static final int MINIMUM_APPLICABLE_TWEETS = 8;
     private static final int MINIMUM_RHYMES = 10;
 
     /**
@@ -41,29 +41,38 @@ public final class RhymingPoemGenerator extends PoemGenerator {
 
         var i = 0;
         while (i < poem.getNumberOfLines()) {
+            var generatedLine = "";
             var tweet = getRandomTweet(tweets, usedIndexes);
             var line = poemLines.get(i);
             var lineRhyme = line.getRhyme();
 
-            var generatedLine = allRhymes.containsKey(lineRhyme)
-                    ? generateRhymingLine(line, allRhymes.get(lineRhyme))
-                    : generatePoemLine(line, tweet);
+            if(lineRhyme < 0){
+                // This is for refrains in villanelles
+                var index = lineRhyme == -1
+                        ? 0  // Where to find the first refrain
+                        : 2; // Where to find the second
+                generatedLine = poemLines.get(index).getText();
+            }else{
+                generatedLine = allRhymes.containsKey(lineRhyme)
+                        ? generateRhymingLine(line, allRhymes.get(lineRhyme))
+                        : generatePoemLine(line, tweet);
 
-            if (generatedLine.isEmpty()) {
-                continue;
-            }
-
-            if (!allRhymes.containsKey(lineRhyme)) {
-                var rhymes = getRhymingWords(rhymer, generatedLine);
-                if (rhymes.size() <= MINIMUM_RHYMES) {
+                if (generatedLine.isEmpty()) {
                     continue;
                 }
-                var applicableTweets = getTweetsThatContainRhymes(tweets, rhymes);
 
-                if (applicableTweets.size() < MINIMUM_APPLICABLE_TWEETS) {
-                    continue;
+                if (!allRhymes.containsKey(lineRhyme)) {
+                    var rhymes = getRhymingWords(rhymer, generatedLine);
+                    if (rhymes.size() <= MINIMUM_RHYMES) {
+                        continue;
+                    }
+                    var applicableTweets = getTweetsThatContainRhymes(tweets, rhymes);
+
+                    if (applicableTweets.size() < MINIMUM_APPLICABLE_TWEETS) {
+                        continue;
+                    }
+                    allRhymes.put(lineRhyme, applicableTweets);
                 }
-                allRhymes.put(lineRhyme, applicableTweets);
             }
 
             poemLines.get(i).setText(generatedLine);
@@ -122,7 +131,12 @@ public final class RhymingPoemGenerator extends PoemGenerator {
         var tweet = getRandomTweet(rhymableTweets, usedIndexes);
         var rhyme = getKeyFromValue(rhymables, tweet);
 
-        return generateLineFromRhyme(poemLine, tweet, rhyme);
+        var line = generateLineFromRhyme(poemLine, tweet, rhyme);
+
+        var key = getKeyFromValue(rhymables, tweet);
+        rhymables.remove(key);
+
+        return line;
     }
 
     private String generateLineFromRhyme(PoemLine poemLine, String tweet, String rhyme) {

@@ -25,6 +25,12 @@ public class PrintablePoem {
             case QUATRAIN:
                 _poem = new Quatrain(poem);
                 break;
+            case SONNET:
+                _poem = new ShakespeareanSonnet(poem);
+                break;
+            case VILLANELLE:
+                _poem = new Villanelle(poem);
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + _poemType);
         }

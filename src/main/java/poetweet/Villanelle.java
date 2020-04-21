@@ -1,23 +1,20 @@
 package poetweet;
 
-public class ShakespeareanSonnet extends Poem {
-    private static final int NUMLINES = 14;
-    private static final int SYLLABLES = 10;
+public class Villanelle extends Poem {
+    private static final int NUMLINES = 19;
+    private static final int SYLLABLES = 8;
     private static final int A = 1;
     private static final int B = 2;
-    private static final int C = 3;
-    private static final int D = 4;
-    private static final int E = 5;
-    private static final int F = 6;
-    private static final int G = 7;
+    private static final int REFRAIN1 = -1;
+    private static final int REFRAIN2 = -2;
 
     /**
      * Constructor.
      */
-    public ShakespeareanSonnet() {
+    public Villanelle() {
         super(NUMLINES,
-                new Integer[]{SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES},
-                new Integer[]{A, B, A, B, C, D, C, D, E, F, E, F, G, G}
+                new Integer[]{SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES},
+                new Integer[]{A, B, A, A, B, REFRAIN1, A, B, REFRAIN2, A, B, REFRAIN1, A, B, REFRAIN2, A, B, REFRAIN1, REFRAIN2}
                 );
     }
 
@@ -25,7 +22,7 @@ public class ShakespeareanSonnet extends Poem {
      * Copy constructor for Quatrain.
      * @param poem the poem we're copying.
      */
-    public ShakespeareanSonnet(Poem poem) {
+    public Villanelle(Poem poem) {
         super(poem);
     }
 }
