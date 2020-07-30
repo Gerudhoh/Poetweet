@@ -1,5 +1,7 @@
 package poetweet;
 
+import java.util.function.Supplier;
+
 public class Haiku extends Poem {
     public static final int NUMLINES = 3;
     public static final int OTHER_LINE_SYLLABLES = 5;
@@ -17,6 +19,24 @@ public class Haiku extends Poem {
                 new Integer[]{OTHER_LINE_SYLLABLES, MIDDLE_LINE_SYLLABLES, OTHER_LINE_SYLLABLES},
                 new Integer[]{RHYME, RHYME, RHYME}
               );
+    }
+
+    /**
+     * Supplies an entity with a printable poem.
+     *
+     * @return A new poem object
+     */
+    @Override
+    public Supplier getPoemSupplier() {
+        return () -> new Haiku(this);
+    }
+
+    /**
+     * @return The string representing the type of poem.
+     */
+    @Override
+    public String getPoemType() {
+        return "Haiku";
     }
 
     /**

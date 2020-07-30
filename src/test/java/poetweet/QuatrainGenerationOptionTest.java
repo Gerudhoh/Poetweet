@@ -31,17 +31,6 @@ public class QuatrainGenerationOptionTest {
      * This is a test. Read the method name to see what it tests.
      */
     @Test
-    public void runMenuOption_correctUserInput_runsSuccessfully() {
-        var result = _quatrainGenerationOption.runMenuOption(GOODINPUT);
-        assertTrue(result == MenuOptionResult.VALID_OPTION_SUCCESS);
-        var poem = _poems.get(0);
-        assertEquals(PoemTypes.QUATRAIN, poem.getPoemType());
-    }
-
-    /**
-     * This is a test. Read the method name to see what it tests.
-     */
-    @Test
     public void runMenuOption_incorrectUserInput_runsUnsuccessfully() {
         try {
             _quatrainGenerationOption.runMenuOption(BADINPUT2);

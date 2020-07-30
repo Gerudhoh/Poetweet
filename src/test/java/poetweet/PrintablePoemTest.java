@@ -18,7 +18,7 @@ public class PrintablePoemTest {
     public void setUp() {
         _haiku = new Haiku();
         _handle = "snak3y_";
-        _printablePoem = new PrintablePoem(_haiku, PoemTypes.HAIKU, _handle);
+        _printablePoem = new PrintablePoem(_haiku, _handle);
     }
 
     /**
@@ -28,15 +28,6 @@ public class PrintablePoemTest {
     public void getPoemTest() {
         var result = _printablePoem.getPoem();
         assertTrue(_haiku.equals(result));
-    }
-
-    /**
-     * This is a test. Read the method name to see what it tests.
-     */
-    @Test
-    public void getPoemTypeTest() {
-        var result = _printablePoem.getPoemType();
-        assertEquals(PoemTypes.HAIKU, result);
     }
 
     /**
