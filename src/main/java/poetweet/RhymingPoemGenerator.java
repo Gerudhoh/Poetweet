@@ -27,17 +27,11 @@ public final class RhymingPoemGenerator extends PoemGenerator {
 
     @Override
     protected boolean generatePoemFromTwitterData(Poem poem, TwitterData twitterData) {
-        Rhymer rhymer;
+        Rhymer rhymer = tryLoadRhymer();
         var usedIndexes = new ArrayList<Integer>();
         var tweets = twitterData.getTweets();
         var poemLines = poem.getPoem();
         var allRhymes = new HashMap<Integer, HashMap<String, String>>();
-
-        try {
-            rhymer =  CmuDictionary.loadRhymer();
-        } catch (IOException e) {
-            throw new Exceptions.PoetweetIOException(e.getMessage());
-        }
 
         var i = 0;
         while (i < poem.getNumberOfLines()) {
@@ -46,16 +40,15 @@ public final class RhymingPoemGenerator extends PoemGenerator {
             var line = poemLines.get(i);
             var lineRhyme = line.getRhyme();
 
-            if(lineRhyme < 0){
-                // This is for refrains in villanelles
+            if (lineRhyme < 0) {
+                // This is for refrains in villanelles.
                 var index = lineRhyme == -1
-                        ? 0  // Where to find the first refrain
-                        : 2; // Where to find the second
+                        ? 0   // the index of the 1st refrain
+                        : 2;  // the index of the 2nd refrain
                 generatedLine = poemLines.get(index).getText();
-            }else{
+            } else {
                 generatedLine = allRhymes.containsKey(lineRhyme)
-                        ? generateRhymingLine(line, allRhymes.get(lineRhyme))
-                        : generatePoemLine(line, tweet);
+                        ? generateRhymingLine(line, allRhymes.get(lineRhyme)) : generatePoemLine(line, tweet);
 
                 if (generatedLine.isEmpty()) {
                     continue;
@@ -75,11 +68,20 @@ public final class RhymingPoemGenerator extends PoemGenerator {
                 }
             }
 
-            poemLines.get(i).setText(generatedLine);
-            i++;
+            poemLines.get(i++).setText(generatedLine);
         }
 
         return true;
+    }
+
+    private Rhymer tryLoadRhymer() {
+        Rhymer rhymer;
+        try {
+            rhymer =  CmuDictionary.loadRhymer();
+        } catch (IOException e) {
+            throw new Exceptions.PoetweetIOException(e.getMessage());
+        }
+        return rhymer;
     }
 
     protected HashMap<String, String> getTweetsThatContainRhymes(ArrayList<String> tweets, ArrayList<String> rhymes) {

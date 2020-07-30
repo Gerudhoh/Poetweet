@@ -1,5 +1,7 @@
 package poetweet;
 
+import java.util.function.Supplier;
+
 public class Quatrain extends Poem {
     private static final int NUMLINES = 4;
     private static final int SYLLABLES = 10;
@@ -14,6 +16,24 @@ public class Quatrain extends Poem {
                 new Integer[]{SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES},
                 new Integer[]{A, B, A, B}
                 );
+    }
+
+    /**
+     * Supplies an entity with a printable poem.
+     *
+     * @return A new poem object
+     */
+    @Override
+    public Supplier getPoemSupplier() {
+        return () -> new Quatrain(this);
+    }
+
+    /**
+     * @return The string representing the type of poem.
+     */
+    @Override
+    public String getPoemType() {
+        return "Quatrain";
     }
 
     /**

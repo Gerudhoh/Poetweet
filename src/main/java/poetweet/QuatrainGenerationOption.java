@@ -39,7 +39,7 @@ public class QuatrainGenerationOption extends PoemGenerationOption {
             return MenuOptionResult.VALID_OPTION_FAILURE;
         }
 
-        var poem = new PrintablePoem(_poem, PoemTypes.QUATRAIN, userInput);
+        var poem = new PrintablePoem(_poem, userInput);
         addNewPoemToList(poem);
 
         return MenuOptionResult.VALID_OPTION_SUCCESS;

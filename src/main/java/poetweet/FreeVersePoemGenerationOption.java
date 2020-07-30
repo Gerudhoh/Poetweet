@@ -63,7 +63,7 @@ public final class FreeVersePoemGenerationOption extends PoemGenerationOption {
             return MenuOptionResult.VALID_OPTION_FAILURE;
         }
 
-        var poem = new PrintablePoem(_poem, PoemTypes.FREEVERSE, twitterHandle);
+        var poem = new PrintablePoem(_poem, twitterHandle);
         addNewPoemToList(poem);
 
         return MenuOptionResult.VALID_OPTION_SUCCESS;
