@@ -12,7 +12,10 @@ public class ShakeySonnetGenerationOption extends PoemGenerationOption {
      * @param poems A list of all the poems we've created.
      * @param poemGenerator the poem generator.
      */
-    public ShakeySonnetGenerationOption(ShakespeareanSonnet poem, ArrayList<PrintablePoem> poems, IPoemGenerator poemGenerator) {
+    public ShakeySonnetGenerationOption(
+            ShakespeareanSonnet poem,
+            ArrayList<PrintablePoem> poems,
+            IPoemGenerator poemGenerator) {
         super(poem, poems);
         _poem = poem;
         _poemGenerator = poemGenerator;
@@ -39,7 +42,7 @@ public class ShakeySonnetGenerationOption extends PoemGenerationOption {
             return MenuOptionResult.VALID_OPTION_FAILURE;
         }
 
-        var poem = new PrintablePoem(_poem, PoemTypes.SONNET, userInput);
+        var poem = new PrintablePoem(_poem, userInput);
         addNewPoemToList(poem);
 
         return MenuOptionResult.VALID_OPTION_SUCCESS;

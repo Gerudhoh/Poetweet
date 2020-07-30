@@ -1,6 +1,26 @@
 package poetweet;
 
+import java.util.function.Supplier;
+
 public final class FreeVersePoem extends Poem {
+    /**
+     * Supplies an entity with a printable poem.
+     *
+     * @return A new poem object
+     */
+    @Override
+    public Supplier getPoemSupplier() {
+        return () -> new FreeVersePoem(this);
+    }
+
+    /**
+     * @return The string representing the type of poem.
+     */
+    @Override
+    public String getPoemType() {
+        return "FreeVersePoem";
+    }
+
     /**
      * Constructor for the Poem class.
      *

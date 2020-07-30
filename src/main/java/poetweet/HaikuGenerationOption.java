@@ -38,7 +38,7 @@ public class HaikuGenerationOption extends PoemGenerationOption {
             return MenuOptionResult.VALID_OPTION_FAILURE;
         }
 
-        var poem = new PrintablePoem(_haiku, PoemTypes.HAIKU, userInput);
+        var poem = new PrintablePoem(_haiku, userInput);
         addNewPoemToList(poem);
 
         return MenuOptionResult.VALID_OPTION_SUCCESS;

@@ -15,8 +15,7 @@ public final class PoemSaver {
         var i = 1;
         for (var returnablePoem : printablePoems) {
             var poemContent = returnablePoem.getPoem().toString();
-            var poemType = returnablePoem.getPoemType();
-            var poemName = poemType.getType() + "_" + returnablePoem.getTwitterHandle() + i++ + ".txt";
+            var poemName = returnablePoem.getPoemType() + "_" + returnablePoem.getTwitterHandle() + i++ + ".txt";
 
             try {
                 Files.write(Paths.get("./poems/" + poemName), poemContent.getBytes());

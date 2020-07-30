@@ -1,31 +1,21 @@
 package poetweet;
 
 import java.util.ArrayList;
-
-enum PoemTypes {
-    FREEVERSE("FreeVerse"),
-    HAIKU("Haiku"),
-    QUATRAIN("Quatrain"),
-    SONNET("Sonnet"),
-    VILLANELLE("Villanelle");
-
-    private String _poemType;
-
-    PoemTypes(String poemType) {
-        _poemType = poemType;
-    }
-
-    /**
-     * Gets the string associated with the poem type.
-     * @return the string associated with the poem type.
-     */
-    public String getType() {
-        return _poemType;
-    }
-}
+import java.util.function.Supplier;
 
 public abstract class Poem {
     private ArrayList<PoemLine> _poem;
+
+    /**
+     * Supplies an entity with a printable poem.
+     * @return A new poem object
+     */
+    public abstract Supplier getPoemSupplier();
+
+    /**
+     * @return The string representing the type of poem.
+     */
+    public abstract String getPoemType();
 
     /**
      * Constructor for the Poem class.

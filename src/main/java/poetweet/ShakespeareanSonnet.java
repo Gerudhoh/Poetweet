@@ -1,5 +1,7 @@
 package poetweet;
 
+import java.util.function.Supplier;
+
 public class ShakespeareanSonnet extends Poem {
     private static final int NUMLINES = 14;
     private static final int SYLLABLES = 10;
@@ -16,9 +18,36 @@ public class ShakespeareanSonnet extends Poem {
      */
     public ShakespeareanSonnet() {
         super(NUMLINES,
-                new Integer[]{SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES},
-                new Integer[]{A, B, A, B, C, D, C, D, E, F, E, F, G, G}
+                new Integer[]{
+                        SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES,
+                        SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES,
+                        SYLLABLES, SYLLABLES, SYLLABLES, SYLLABLES,
+                        SYLLABLES, SYLLABLES
+                },
+                new Integer[]{
+                        A, B, A, B,
+                        C, D, C, D,
+                        E, F, E, F,
+                        G, G}
                 );
+    }
+
+    /**
+     * Supplies an entity with a printable poem.
+     *
+     * @return A new poem object
+     */
+    @Override
+    public Supplier getPoemSupplier() {
+        return () -> new ShakespeareanSonnet(this);
+    }
+
+    /**
+     * @return The string representing the type of poem.
+     */
+    @Override
+    public String getPoemType() {
+        return "ShakespeareanSonnet";
     }
 
     /**
