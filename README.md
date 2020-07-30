@@ -1,4 +1,6 @@
-# Poetweet - Milestone 2
+# Poetweet
+
+![poetweet in action](poetweet.gif)
 
 ## To Run:
 
