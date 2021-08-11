@@ -15,7 +15,6 @@ public abstract class Poem {
     /**
      * @return The string representing the type of poem.
      */
-    // TODO: see if I can make this non-abstract and it just returns the simple name ???
     public abstract String getPoemType();
 
     /**
