@@ -1,5 +1,6 @@
 package poetweet.restservice;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +9,7 @@ import poetweet.*;
 import java.util.ArrayList;
 
 @RestController
+@CrossOrigin
 public class PoemController {
     private final PoemGeneratorFactory _poemGeneratorFactory = new PoemGeneratorFactory();
     private final Haiku _haiku = new Haiku();
