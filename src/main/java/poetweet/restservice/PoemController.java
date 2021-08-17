@@ -9,18 +9,18 @@ import poetweet.PrintablePoem;
 
 @RestController
 public class PoemController {
-    private final PoemGeneratorFactory poemGeneratorFactory = new PoemGeneratorFactory();
-    private final Haiku haiku = new Haiku();
+    private final PoemGeneratorFactory _poemGeneratorFactory = new PoemGeneratorFactory();
+    private final Haiku _haiku = new Haiku();
 
     /**
-     *
-     * @param twitterId
-     * @return
+     * Generates a poem from a twitter id.
+     * @param twitterId twitter handle
+     * @return poem
      */
     @GetMapping("/poem")
     public PrintablePoem poem(@RequestParam(value = "twitterhandle", defaultValue = "dog_feelings") String twitterId) {
-        var success = poemGeneratorFactory.buildNonRhymingPoemGenerator().generatePoem(haiku, twitterId);
+        var success = _poemGeneratorFactory.buildNonRhymingPoemGenerator().generatePoem(_haiku, twitterId);
 
-        return new PrintablePoem(haiku, twitterId);
+        return new PrintablePoem(_haiku, twitterId);
     }
 }
