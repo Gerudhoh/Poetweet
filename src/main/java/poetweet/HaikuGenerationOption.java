@@ -19,6 +19,15 @@ public class HaikuGenerationOption extends PoemGenerationOption {
     }
 
     /**
+     * Test.
+     * @return String the Haiku
+     */
+    public String getHaiku() {
+        return "five syllables here / then seven syllables go here / and a final five";
+    }
+
+
+    /**
      * Gets the option description (For printing the menu).
      * @return A short description of the Haiku Generation Option.
      */
