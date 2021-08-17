@@ -3,9 +3,9 @@ package poetweet.restservice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import poetweet.Haiku;
-import poetweet.PoemGeneratorFactory;
-import poetweet.PrintablePoem;
+import poetweet.*;
+
+import java.util.ArrayList;
 
 @RestController
 public class PoemController {
@@ -18,9 +18,9 @@ public class PoemController {
      * @return poem
      */
     @GetMapping("/poem")
-    public PrintablePoem poem(@RequestParam(value = "twitterhandle", defaultValue = "dog_feelings") String twitterId) {
+    public ArrayList<PoemLine> poem(@RequestParam(value = "twitterhandle", defaultValue = "dog_feelings") String twitterId) {
         var success = _poemGeneratorFactory.buildNonRhymingPoemGenerator().generatePoem(_haiku, twitterId);
 
-        return new PrintablePoem(_haiku, twitterId);
+        return _haiku.getPoem();
     }
 }
