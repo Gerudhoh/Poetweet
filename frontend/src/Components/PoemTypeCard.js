@@ -1,5 +1,6 @@
 // Packages
 import * as React from 'react';
+import {Link} from 'react-router-dom';
 
 //Material UI Components
 import Button from '@mui/material/Button';
@@ -8,24 +9,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
-import { styled } from '@mui/material/styles';
-
 //Styling
 
-const PoemTypeCardStyles = styled(Box)(({ theme }) => ({
-    position: 'absolute',
-    top: 0,
-    backgroundColor: '#533745',
-    opacity: 0,
-    color: '#D7C0AD',
-    width: '100%',
-    height: '100%',
-    textAlign: 'center',
-    '&:hover': {
-      opacity: 0.6,
-    }
-  }));
-  
   const poemTypeCardStyles = {
     small:
     {
@@ -47,9 +32,8 @@ const PoemTypeCardStyles = styled(Box)(({ theme }) => ({
       iconSize: { height: '25px', width: '25px' }
     }
   };
-  
-  class PoemTypeCard extends React.Component {
 
+  class PoemTypeCard extends React.Component {
     constructor(props) {
         super(props);
         this.size = poemTypeCardStyles[this.props.cardSize];
@@ -77,7 +61,7 @@ const PoemTypeCardStyles = styled(Box)(({ theme }) => ({
               transition: '0.1s ease-in',
               }}
         >
-                <Button variant="outlined">Write Poem</Button>
+                <Button variant="outlined"><Link to="/poemGeneration" state={this.poemTypeName}>Write Poem</Link></Button>
             </CardContent>
           </Card>
         );

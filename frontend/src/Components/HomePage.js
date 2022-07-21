@@ -3,11 +3,10 @@ import * as React from 'react';
 
 //Custom Components
 import PoemSelection from "./PoemSelection";
-import PoemGeneration from "./PoemGeneration";
+import PoemGenerationPage from "./PoemGenerationPage";
 
 export default function HomePage() {
       return (
-        // <PoemSelection/>
-        <PoemGeneration/>
+        <PoemSelection/>
       );
   }

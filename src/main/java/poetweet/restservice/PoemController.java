@@ -16,7 +16,7 @@ public class PoemController {
 
     /**
      * Generates a poem from a twitter id.
-     * @param twitterId twitter handle
+     * @param body Request body containing twitter handle
      * @return poem
      */
     @PostMapping("/poem/haiku")
