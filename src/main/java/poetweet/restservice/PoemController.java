@@ -1,12 +1,12 @@
 package poetweet.restservice;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import poetweet.*;
+import org.springframework.web.bind.annotation.*;
+import poetweet.Haiku;
+import poetweet.PoemGeneratorFactory;
+import poetweet.PoemLine;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -19,8 +19,9 @@ public class PoemController {
      * @param twitterId twitter handle
      * @return poem
      */
-    @GetMapping("/poem")
-    public ArrayList<PoemLine> poem(@RequestParam(value = "twitterhandle", defaultValue = "dog_feelings") String twitterId) {
+    @PostMapping("/poem/haiku")
+    public ArrayList<PoemLine> poem(@RequestBody Map<String, String> body) {
+        var twitterId = body.get("twitterId");
         var success = _poemGeneratorFactory.buildNonRhymingPoemGenerator().generatePoem(_haiku, twitterId);
 
         return _haiku.getPoem();
