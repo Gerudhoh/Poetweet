@@ -1,5 +1,7 @@
 # Poetweet
 
+![poetweet web in action](poetweet-web.gif)
+
 ![poetweet in action](poetweet.gif)
 
 ## To Run:
